@@ -413,9 +413,10 @@ const Orderbook = ({
                 <div key={`sell-${index}`} className="relative">
                   {/* Volume Background */}
                   <div
-                    className="absolute right-0 top-0 h-full bg-red-50"
+                    className="absolute right-0 top-0 h-full"
                     style={{
                       width: `${getVolumeWidth(order.total, maxTotal)}%`,
+                      backgroundColor: "rgba(239, 68, 68, 0.35)", // Red with 35% opacity
                     }}
                   ></div>
 
@@ -424,10 +425,10 @@ const Orderbook = ({
                     <div className="text-red-500 font-medium">
                       {formatNumber(order.price, 2)}
                     </div>
-                    <div className="text-center text-gray-600 font-medium">
+                    <div className="text-center text-gray-600 dark:text-white font-medium">
                       {order.amount.toFixed(6)}
                     </div>
-                    <div className="text-right text-gray-600 font-medium">
+                    <div className="text-right text-gray-600 dark:text-white font-medium">
                       {formatNumber(order.total)}
                     </div>
                   </div>
@@ -453,9 +454,10 @@ const Orderbook = ({
                 <div key={`buy-${index}`} className="relative">
                   {/* Volume Background */}
                   <div
-                    className="absolute right-0 top-0 h-full bg-green-50"
+                    className="absolute right-0 top-0 h-full"
                     style={{
                       width: `${getVolumeWidth(order.total, maxTotal)}%`,
+                      backgroundColor: "rgba(34, 197, 94, 0.35)", // Green with 35% opacity
                     }}
                   ></div>
 
@@ -464,10 +466,10 @@ const Orderbook = ({
                     <div className="text-green-500 font-medium">
                       {formatNumber(order.price, 2)}
                     </div>
-                    <div className="text-center text-gray-600 font-medium">
+                    <div className="text-center text-gray-600 dark:text-white font-medium">
                       {order.amount.toFixed(6)}
                     </div>
-                    <div className="text-right text-gray-600 font-medium">
+                    <div className="text-right text-gray-600 dark:text-white font-medium">
                       {formatNumber(order.total)}
                     </div>
                   </div>
