@@ -303,8 +303,8 @@ const Orderbook = ({
       col2: trade.amount.toFixed(6),
       col3: trade.time,
       col1Color: trade.side === "buy" ? "text-green-500" : "text-red-500",
-      col2Color: "text-gray-600",
-      col3Color: "text-gray-500",
+      col2Color: "text-gray-600 dark:text-white",
+      col3Color: "text-gray-500 dark:text-white",
       arrow: trade.side === "buy" ? ("up" as const) : ("down" as const),
     }));
   };
