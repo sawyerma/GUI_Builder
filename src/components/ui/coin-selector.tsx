@@ -162,7 +162,12 @@ const CoinSelector = ({
       {/* Dropdown Menu */}
       {isOpen && (
         <div className="absolute top-full left-0 mt-2 z-50 max-w-[480px]">
-          <div className="min-w-[368px] rounded-xl shadow-2xl bg-white dark:bg-gray-800 overflow-hidden backdrop-blur-sm border border-gray-200 dark:border-gray-700">
+          <div
+            className="min-w-[368px] rounded-xl shadow-2xl bg-white dark:bg-gray-800 overflow-hidden backdrop-blur-sm border border-gray-200 dark:border-gray-700"
+            style={{
+              fontFamily: "'Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'",
+            }}
+          >
             {/* Header */}
             <div className="flex items-center px-4 bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-gray-700 dark:to-gray-800 font-bold h-9 text-gray-600 dark:text-gray-300 tracking-wide font-sans text-[10px] uppercase">
               <div
