@@ -6,6 +6,7 @@ import {
 } from "./resizable";
 import Orderbook from "./orderbook";
 import TradingChart from "./trading-chart";
+import LatencyIndicators from "./latency-indicators";
 
 const ChartSection = () => {
   return (
@@ -37,6 +38,9 @@ const ChartSection = () => {
       <div className="mt-2 text-xs text-gray-500 text-center">
         Ziehen Sie den Griff zwischen den Bereichen, um die Größe anzupassen
       </div>
+
+      {/* Latency and System Status */}
+      <LatencyIndicators systemStatus="stable" />
     </div>
   );
 };

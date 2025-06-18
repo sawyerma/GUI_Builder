@@ -3,8 +3,12 @@ import { useState } from "react";
 const TimeButtons = () => {
   const [activeTime, setActiveTime] = useState("1s");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isEditMode, setIsEditMode] = useState(false);
+  const [selectedIntervals, setSelectedIntervals] = useState(
+    new Set(["1s", "5M", "15M", "1S", "1T"]),
+  );
 
-  const displayIntervals = ["1s", "5M", "15M", "1S", "1T"];
+  const displayIntervals = Array.from(selectedIntervals);
 
   const allIntervals = [
     { label: "Zeit", value: "zeit", disabled: true },
@@ -32,6 +36,27 @@ const TimeButtons = () => {
     if (interval === "zeit") return;
     setActiveTime(interval);
     setIsDropdownOpen(false);
+  };
+
+  const handleEditToggle = () => {
+    setIsEditMode(!isEditMode);
+  };
+
+  const handleIntervalToggle = (interval: string) => {
+    if (interval === "zeit") return;
+
+    const newSelected = new Set(selectedIntervals);
+    if (newSelected.has(interval)) {
+      newSelected.delete(interval);
+    } else {
+      newSelected.add(interval);
+    }
+    setSelectedIntervals(newSelected);
+  };
+
+  const handleSave = () => {
+    setIsEditMode(false);
+    // Optional: callback to parent component
   };
 
   return (
@@ -72,29 +97,47 @@ const TimeButtons = () => {
                 </h3>
                 <button
                   className="text-blue-500 text-sm font-medium"
-                  onClick={() => setIsDropdownOpen(false)}
+                  onClick={isEditMode ? handleSave : handleEditToggle}
                 >
-                  Bearbeiten
+                  {isEditMode ? "Speichern" : "Bearbeiten"}
                 </button>
               </div>
 
               {/* Grid of time intervals */}
               <div className="grid grid-cols-4 gap-2">
                 {allIntervals.map((interval) => (
-                  <button
+                  <div
                     key={interval.value}
-                    className={`h-10 rounded text-sm font-medium transition-colors ${
+                    className={`h-10 rounded text-sm font-medium transition-colors relative flex items-center justify-center ${
                       interval.disabled
                         ? "bg-gray-200 text-gray-500 cursor-not-allowed"
-                        : activeTime === interval.value
+                        : activeTime === interval.value && !isEditMode
                           ? "bg-blue-100 text-blue-600 border border-blue-200"
-                          : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                          : "bg-gray-100 text-gray-700 hover:bg-gray-200 cursor-pointer"
                     }`}
-                    onClick={() => handleTimeSelect(interval.value)}
-                    disabled={interval.disabled}
+                    onClick={() =>
+                      isEditMode
+                        ? handleIntervalToggle(interval.value)
+                        : handleTimeSelect(interval.value)
+                    }
                   >
                     {interval.label}
-                  </button>
+
+                    {/* Checkbox in edit mode */}
+                    {isEditMode && !interval.disabled && (
+                      <div className="absolute top-1 right-1">
+                        <div
+                          className={`w-4 h-4 rounded-full flex items-center justify-center text-xs ${
+                            selectedIntervals.has(interval.value)
+                              ? "bg-blue-500 text-white"
+                              : "bg-gray-300 text-gray-600"
+                          }`}
+                        >
+                          {selectedIntervals.has(interval.value) ? "✓" : ""}
+                        </div>
+                      </div>
+                    )}
+                  </div>
                 ))}
               </div>
             </div>

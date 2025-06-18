@@ -3,7 +3,6 @@ import TradingNav from "../components/ui/trading-nav";
 import PriceDisplay from "../components/ui/price-display";
 import TimeButtons from "../components/ui/time-buttons";
 import ChartSection from "../components/ui/chart-section";
-import LatencyIndicators from "../components/ui/latency-indicators";
 import CoinSelector from "../components/ui/coin-selector";
 
 interface CoinData {
@@ -78,9 +77,6 @@ const Index = () => {
 
       {/* Main Content: Chart + Orderbook */}
       <ChartSection />
-
-      {/* Latency Indicators */}
-      <LatencyIndicators />
     </div>
   );
 };
