@@ -7,6 +7,11 @@ const TimeButtons = () => {
   const [selectedIntervals, setSelectedIntervals] = useState(
     new Set(["1s", "5s", "15s", "1m", "1h"]),
   );
+  const [isIndicatorsOpen, setIsIndicatorsOpen] = useState(false);
+  const [selectedIndicators, setSelectedIndicators] = useState(
+    new Set(["MA", "RSI", "MACD"]),
+  );
+  const [isGridView, setIsGridView] = useState(false);
 
   const displayIntervals = Array.from(selectedIntervals);
 
@@ -33,6 +38,19 @@ const TimeButtons = () => {
     { label: "6M", value: "6M" },
   ];
 
+  const allIndicators = [
+    { label: "MA", name: "Moving Average", value: "MA" },
+    { label: "EMA", name: "Exponential Moving Average", value: "EMA" },
+    { label: "RSI", name: "Relative Strength Index", value: "RSI" },
+    { label: "MACD", name: "MACD", value: "MACD" },
+    { label: "BB", name: "Bollinger Bands", value: "BB" },
+    { label: "VOL", name: "Volume", value: "VOL" },
+    { label: "STOCH", name: "Stochastic", value: "STOCH" },
+    { label: "ADX", name: "Average Directional Index", value: "ADX" },
+    { label: "CCI", name: "Commodity Channel Index", value: "CCI" },
+    { label: "ROC", name: "Rate of Change", value: "ROC" },
+  ];
+
   const handleTimeSelect = (interval: string) => {
     setActiveTime(interval);
     setIsDropdownOpen(false);
@@ -57,8 +75,18 @@ const TimeButtons = () => {
     // Optional: callback to parent component
   };
 
+  const handleIndicatorToggle = (indicator: string) => {
+    const newSelected = new Set(selectedIndicators);
+    if (newSelected.has(indicator)) {
+      newSelected.delete(indicator);
+    } else {
+      newSelected.add(indicator);
+    }
+    setSelectedIndicators(newSelected);
+  };
+
   return (
-    <div className="flex items-center gap-2 my-3 text-sm">
+    <div className="flex items-center gap-3 my-3 text-sm">
       <label className="font-medium text-[#444] dark:text-gray-300 mr-2">
         Zeit
       </label>
@@ -174,6 +202,231 @@ const TimeButtons = () => {
             onClick={() => setIsDropdownOpen(false)}
           />
         )}
+      </div>
+
+      {/* Separator */}
+      <div className="w-px h-6 bg-gray-300 dark:bg-gray-600 mx-2"></div>
+
+      {/* Indicators Button */}
+      <div className="relative">
+        <div
+          className="bg-gray-100 dark:bg-gray-700 text-[#222] dark:text-white hover:bg-gray-200 dark:hover:bg-gray-600 cursor-pointer select-none flex items-center gap-2"
+          style={{
+            padding: "4px 12px",
+            borderRadius: "4px",
+            fontSize: "12.8px",
+            border: "none",
+            outline: "none",
+            boxShadow: "none",
+            borderWidth: "0",
+            borderStyle: "none",
+            borderColor: "transparent",
+          }}
+          onClick={() => setIsIndicatorsOpen(!isIndicatorsOpen)}
+        >
+          <svg
+            width="14"
+            height="14"
+            viewBox="0 0 14 14"
+            fill="none"
+            className="opacity-80"
+          >
+            <path
+              d="M2 12L5 9L8 11L12 7"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+            <path
+              d="M12 4V7H9"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+          Indikatoren ▽
+        </div>
+
+        {/* Indicators Dropdown */}
+        {isIndicatorsOpen && (
+          <div className="absolute top-full left-0 mt-1 z-50 w-72 bg-white dark:bg-gray-800 rounded-lg shadow-xl">
+            <div className="p-4">
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="font-semibold text-gray-900 dark:text-white">
+                  Indikatoren
+                </h3>
+                <button
+                  className="text-blue-500 text-sm font-medium"
+                  onClick={() => setIsIndicatorsOpen(false)}
+                >
+                  Fertig
+                </button>
+              </div>
+
+              <div className="space-y-2">
+                {allIndicators.map((indicator) => (
+                  <div
+                    key={indicator.value}
+                    className="flex items-center justify-between p-2 rounded hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer"
+                    onClick={() => handleIndicatorToggle(indicator.value)}
+                  >
+                    <div>
+                      <span className="font-medium text-gray-900 dark:text-white">
+                        {indicator.label}
+                      </span>
+                      <span className="text-sm text-gray-500 dark:text-gray-400 ml-2">
+                        {indicator.name}
+                      </span>
+                    </div>
+                    <div
+                      className={`w-4 h-4 rounded border-2 flex items-center justify-center ${
+                        selectedIndicators.has(indicator.value)
+                          ? "bg-blue-500 border-blue-500 text-white"
+                          : "border-gray-300 dark:border-gray-600"
+                      }`}
+                    >
+                      {selectedIndicators.has(indicator.value) && (
+                        <svg
+                          width="10"
+                          height="10"
+                          viewBox="0 0 10 10"
+                          fill="none"
+                        >
+                          <path
+                            d="M2 5L4 7L8 3"
+                            stroke="currentColor"
+                            strokeWidth="1.5"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          />
+                        </svg>
+                      )}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Overlay to close indicators dropdown */}
+        {isIndicatorsOpen && (
+          <div
+            className="fixed inset-0 z-40"
+            onClick={() => setIsIndicatorsOpen(false)}
+          />
+        )}
+      </div>
+
+      {/* Grid View Button */}
+      <div
+        className={`cursor-pointer select-none flex items-center justify-center ${
+          isGridView
+            ? "bg-[#1a48d8] text-white"
+            : "bg-gray-100 dark:bg-gray-700 text-[#222] dark:text-white hover:bg-gray-200 dark:hover:bg-gray-600"
+        }`}
+        style={{
+          padding: "4px 8px",
+          borderRadius: "4px",
+          fontSize: "12.8px",
+          border: "none",
+          outline: "none",
+          boxShadow: "none",
+          borderWidth: "0",
+          borderStyle: "none",
+          borderColor: "transparent",
+          width: "28px",
+          height: "24px",
+        }}
+        onClick={() => setIsGridView(!isGridView)}
+        title="Grid View"
+      >
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+          <rect
+            x="1"
+            y="1"
+            width="5"
+            height="5"
+            rx="1"
+            stroke="currentColor"
+            strokeWidth="1.2"
+            fill="none"
+          />
+          <rect
+            x="8"
+            y="1"
+            width="5"
+            height="5"
+            rx="1"
+            stroke="currentColor"
+            strokeWidth="1.2"
+            fill="none"
+          />
+          <rect
+            x="1"
+            y="8"
+            width="5"
+            height="5"
+            rx="1"
+            stroke="currentColor"
+            strokeWidth="1.2"
+            fill="none"
+          />
+          <rect
+            x="8"
+            y="8"
+            width="5"
+            height="5"
+            rx="1"
+            stroke="currentColor"
+            strokeWidth="1.2"
+            fill="none"
+          />
+        </svg>
+      </div>
+
+      {/* Alarm Button */}
+      <div
+        className="bg-gray-100 dark:bg-gray-700 text-[#222] dark:text-white hover:bg-gray-200 dark:hover:bg-gray-600 cursor-pointer select-none flex items-center gap-2"
+        style={{
+          padding: "4px 12px",
+          borderRadius: "4px",
+          fontSize: "12.8px",
+          border: "none",
+          outline: "none",
+          boxShadow: "none",
+          borderWidth: "0",
+          borderStyle: "none",
+          borderColor: "transparent",
+        }}
+        onClick={() => {
+          // Handle alarm functionality
+          console.log("Alarm clicked");
+        }}
+      >
+        <svg
+          width="14"
+          height="14"
+          viewBox="0 0 14 14"
+          fill="none"
+          className="opacity-80"
+        >
+          <path
+            d="M7 13C10.3137 13 13 10.3137 13 7C13 3.68629 10.3137 1 7 1C3.68629 1 1 3.68629 1 7C1 10.3137 3.68629 13 7 13Z"
+            stroke="currentColor"
+            strokeWidth="1.2"
+            fill="none"
+          />
+          <path
+            d="M7 4V7L9 9"
+            stroke="currentColor"
+            strokeWidth="1.2"
+            strokeLinecap="round"
+          />
+        </svg>
+        Alarm
       </div>
     </div>
   );
