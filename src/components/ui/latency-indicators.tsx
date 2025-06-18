@@ -9,31 +9,31 @@ const LatencyIndicators = ({
     switch (systemStatus) {
       case "stable":
         return {
-          text: "Systemverbindung stabil",
+          text: "System connection stable",
           bgColor: "bg-green-100",
           textColor: "text-green-600",
-          icon: "📡",
+          icon: "◉",
         };
       case "unstable":
         return {
           text: "System connection unstable",
           bgColor: "bg-orange-100",
           textColor: "text-orange-600",
-          icon: "⚠️",
+          icon: "◉",
         };
       case "reconnect":
         return {
           text: "reconnect",
           bgColor: "bg-red-100",
           textColor: "text-red-600",
-          icon: "🔄",
+          icon: "◉",
         };
       default:
         return {
-          text: "Systemverbindung stabil",
+          text: "System connection stable",
           bgColor: "bg-green-100",
           textColor: "text-green-600",
-          icon: "📡",
+          icon: "◉",
         };
     }
   };

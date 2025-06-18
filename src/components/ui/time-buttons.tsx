@@ -5,35 +5,35 @@ const TimeButtons = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isEditMode, setIsEditMode] = useState(false);
   const [selectedIntervals, setSelectedIntervals] = useState(
-    new Set(["1s", "5M", "15M", "1S", "1T"]),
+    new Set(["1s", "5s", "15s", "1m", "1h"]),
   );
 
   const displayIntervals = Array.from(selectedIntervals);
 
   const allIntervals = [
-    { label: "Zeit", value: "zeit", disabled: true },
     { label: "1s", value: "1s" },
-    { label: "1M", value: "1M" },
+    { label: "5s", value: "5s" },
+    { label: "10s", value: "10s" },
+    { label: "15s", value: "15s" },
+    { label: "30s", value: "30s" },
+    { label: "1m", value: "1m" },
     { label: "2m", value: "2m" },
-    { label: "3M", value: "3M" },
-    { label: "5M", value: "5M" },
-    { label: "15M", value: "15M" },
-    { label: "30M", value: "30M" },
-    { label: "1S", value: "1S" },
-    { label: "2S", value: "2S" },
-    { label: "4S", value: "4S" },
-    { label: "6S", value: "6S" },
-    { label: "8S", value: "8S" },
-    { label: "12S", value: "12S" },
-    { label: "1T", value: "1T" },
-    { label: "3T", value: "3T" },
-    { label: "1W", value: "1W" },
-    { label: "1M", value: "1Mo" },
-    { label: "3M", value: "3Mo" },
+    { label: "5m", value: "5m" },
+    { label: "10m", value: "10m" },
+    { label: "15m", value: "15m" },
+    { label: "30m", value: "30m" },
+    { label: "1h", value: "1h" },
+    { label: "2h", value: "2h" },
+    { label: "4h", value: "4h" },
+    { label: "6h", value: "6h" },
+    { label: "12h", value: "12h" },
+    { label: "1d", value: "1d" },
+    { label: "1w", value: "1w" },
+    { label: "1M", value: "1M" },
+    { label: "6M", value: "6M" },
   ];
 
   const handleTimeSelect = (interval: string) => {
-    if (interval === "zeit") return;
     setActiveTime(interval);
     setIsDropdownOpen(false);
   };
@@ -43,8 +43,6 @@ const TimeButtons = () => {
   };
 
   const handleIntervalToggle = (interval: string) => {
-    if (interval === "zeit") return;
-
     const newSelected = new Set(selectedIntervals);
     if (newSelected.has(interval)) {
       newSelected.delete(interval);
@@ -108,12 +106,10 @@ const TimeButtons = () => {
                 {allIntervals.map((interval) => (
                   <div
                     key={interval.value}
-                    className={`h-10 rounded text-sm font-medium transition-colors relative flex items-center justify-center ${
-                      interval.disabled
-                        ? "bg-gray-200 text-gray-500 cursor-not-allowed"
-                        : activeTime === interval.value && !isEditMode
-                          ? "bg-blue-100 text-blue-600 border border-blue-200"
-                          : "bg-gray-100 text-gray-700 hover:bg-gray-200 cursor-pointer"
+                    className={`h-10 rounded text-sm font-medium transition-colors relative flex items-center justify-center cursor-pointer ${
+                      activeTime === interval.value && !isEditMode
+                        ? "bg-blue-100 text-blue-600 border border-blue-200"
+                        : "bg-gray-100 text-gray-700 hover:bg-gray-200"
                     }`}
                     onClick={() =>
                       isEditMode
@@ -124,7 +120,7 @@ const TimeButtons = () => {
                     {interval.label}
 
                     {/* Checkbox in edit mode */}
-                    {isEditMode && !interval.disabled && (
+                    {isEditMode && (
                       <div className="absolute top-1 right-1">
                         <div
                           className={`w-4 h-4 rounded-full flex items-center justify-center text-xs ${
