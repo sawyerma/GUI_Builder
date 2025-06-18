@@ -1,5 +1,6 @@
 import { useState } from "react";
 import ThemeToggle from "./theme-toggle";
+import SettingsModal from "./settings-modal";
 
 interface TradingNavProps {
   onTradingModeChange?: (mode: string) => void;
@@ -8,6 +9,7 @@ interface TradingNavProps {
 const TradingNav = ({ onTradingModeChange }: TradingNavProps) => {
   const [activeTab, setActiveTab] = useState("Spot");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isSettingsOpen, setIsSettingsOpen] = useState(false);
 
   const marketOptions = [
     {
@@ -50,6 +52,9 @@ const TradingNav = ({ onTradingModeChange }: TradingNavProps) => {
   const handleTabClick = (itemName: string) => {
     if (itemName === "Market") {
       setIsDropdownOpen(!isDropdownOpen);
+    } else if (itemName === "Settings") {
+      setIsSettingsOpen(true);
+      setIsDropdownOpen(false);
     } else {
       setActiveTab(itemName);
       setIsDropdownOpen(false);
@@ -121,6 +126,12 @@ const TradingNav = ({ onTradingModeChange }: TradingNavProps) => {
           onClick={() => setIsDropdownOpen(false)}
         />
       )}
+
+      {/* Settings Modal */}
+      <SettingsModal
+        isOpen={isSettingsOpen}
+        onClose={() => setIsSettingsOpen(false)}
+      />
     </nav>
   );
 };
