@@ -4,6 +4,7 @@ import {
   ResizablePanel,
   ResizablePanelGroup,
 } from "./resizable";
+import Orderbook from "./orderbook";
 
 type LayoutMode = "horizontal" | "vertical" | "fullwidth";
 
@@ -87,16 +88,14 @@ const ChartSection = () => {
     isDraggable?: boolean;
   }) => (
     <div
-      className={`bg-white rounded-xl shadow h-full flex items-center justify-center ${
+      className={`h-full ${
         isDraggable ? "cursor-grab active:cursor-grabbing" : ""
       } ${dragState.draggedItem === "orderbook" ? "opacity-50 scale-105 shadow-2xl" : ""}`}
       onMouseDown={
         isDraggable ? (e) => handleDragStart("orderbook", e) : undefined
       }
     >
-      <span className="text-gray-400 text-[0.84rem] select-none">
-        [Orderbuch] {isDraggable && "📋"}
-      </span>
+      <Orderbook />
     </div>
   );
 
