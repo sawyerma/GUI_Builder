@@ -110,7 +110,7 @@ const TimeButtons = () => {
                     key={interval.value}
                     className={`h-10 rounded text-sm font-medium transition-colors relative flex items-center justify-center cursor-pointer ${
                       activeTime === interval.value && !isEditMode
-                        ? "bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-300 border border-blue-200 dark:border-blue-700"
+                        ? "bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-300"
                         : "bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-600"
                     }`}
                     onClick={() =>
