@@ -17,9 +17,13 @@ type SortDirection = "asc" | "desc" | "random";
 const CoinSelector = ({
   selectedCoin,
   onCoinSelect,
+  showLiveStatus = true,
+  showHistStatus = true,
 }: {
   selectedCoin: string;
   onCoinSelect: (coin: CoinData) => void;
+  showLiveStatus?: boolean;
+  showHistStatus?: boolean;
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [sortField, setSortField] = useState<SortField>("coin");
@@ -247,22 +251,32 @@ const CoinSelector = ({
                   {coin.change}
                 </div>
                 <div className="w-[49px] text-center">
-                  <span
-                    className={`inline-block w-3 h-3 rounded-full border-[1px] ${
-                      coin.liveStatus === "green"
-                        ? "bg-[#41cf58] border-[#40ba59]"
-                        : "bg-[#ef4444] border-[#d73c3c]"
-                    }`}
-                  ></span>
+                  {showLiveStatus && (
+                    <span
+                      className="inline-block w-3 h-3 rounded-full"
+                      style={{
+                        backgroundColor:
+                          coin.liveStatus === "green"
+                            ? "rgba(65, 207, 88, 0.9)"
+                            : "rgba(239, 68, 68, 0.9)",
+                        border: "none",
+                      }}
+                    ></span>
+                  )}
                 </div>
                 <div className="w-[49px] text-center">
-                  <span
-                    className={`inline-block w-3 h-3 rounded-full border-[1px] ${
-                      coin.histStatus === "green"
-                        ? "bg-[#41cf58] border-[#40ba59]"
-                        : "bg-[#ef4444] border-[#d73c3c]"
-                    }`}
-                  ></span>
+                  {showHistStatus && (
+                    <span
+                      className="inline-block w-3 h-3 rounded-full"
+                      style={{
+                        backgroundColor:
+                          coin.histStatus === "green"
+                            ? "rgba(65, 207, 88, 0.9)"
+                            : "rgba(239, 68, 68, 0.9)",
+                        border: "none",
+                      }}
+                    ></span>
+                  )}
                 </div>
               </div>
             ))}

@@ -66,6 +66,8 @@ const Index = () => {
             <CoinSelector
               selectedCoin={selectedCoin}
               onCoinSelect={handleCoinSelect}
+              showLiveStatus={true}
+              showHistStatus={true}
             />
           </div>
 
