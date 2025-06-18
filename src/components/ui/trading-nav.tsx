@@ -53,9 +53,7 @@ const TradingNav = ({ onTradingModeChange }: TradingNavProps) => {
     } else {
       setActiveTab(itemName);
       setIsDropdownOpen(false);
-      if (onTradingModeChange) {
-        onTradingModeChange(itemName);
-      }
+      // Don't send non-market buttons to tradingMode - only market dropdown options should be displayed under price
     }
   };
 
