@@ -74,10 +74,10 @@ const TradingNav = ({ onTradingModeChange }: TradingNavProps) => {
         {navItems.map((item) => (
           <div key={item.name} className="relative">
             <button
-              className={`px-5 py-1.5 rounded border-2 font-medium transition-colors ${
+              className={`px-5 py-1.5 rounded font-medium transition-colors ${
                 activeTab === item.name
-                  ? "border-[#e4261c] text-[#e4261c]"
-                  : "border-[#444] text-[#222] dark:text-white dark:border-[#666]"
+                  ? "bg-[#e4261c] text-white"
+                  : "hover:bg-gray-100 dark:hover:bg-gray-700 text-[#222] dark:text-white"
               }`}
               onClick={() => handleTabClick(item.name)}
             >

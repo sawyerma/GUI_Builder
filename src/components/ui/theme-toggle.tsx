@@ -98,7 +98,7 @@ const ThemeToggle = () => {
   return (
     <button
       onClick={toggleTheme}
-      className={`px-3 py-1.5 rounded border-2 font-medium transition-colors ${"border-[#444] text-[#222] hover:border-[#666] dark:text-white dark:border-[#666] dark:hover:border-[#888]"}`}
+      className={`px-3 py-1.5 rounded font-medium transition-colors ${"text-[#222] hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"}`}
       title={getTooltip()}
       aria-label={`Aktueller Modus: ${getTooltip()}. Klicken zum Wechseln.`}
     >
