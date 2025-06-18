@@ -50,7 +50,12 @@ const Index = () => {
 
   return (
     <ThemeProvider>
-      <div className="bg-[#fbfcfd] dark:bg-gray-900 text-[#222] dark:text-white font-sans min-h-screen px-6 py-5 transition-colors">
+      <div
+        className="bg-[#fbfcfd] dark:bg-gray-900 text-[#222] dark:text-white min-h-screen px-6 py-5 transition-colors"
+        style={{
+          fontFamily: "'Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'",
+        }}
+      >
         {/* Top Navigation */}
         <TradingNav onTradingModeChange={setTradingMode} />
 
