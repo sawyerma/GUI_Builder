@@ -349,8 +349,13 @@ const Orderbook = ({
         <div className="flex items-center justify-between mb-3">
           <div className="flex relative">
             <button
-              onClick={() => handleTabChange("orderbook")}
-              className={`px-4 py-2 text-sm font-medium transition-colors relative ${
+              type="button"
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                handleTabChange("orderbook");
+              }}
+              className={`px-4 py-2 text-sm font-medium transition-colors relative cursor-pointer ${
                 activeTab === "orderbook"
                   ? "text-black"
                   : "text-gray-500 hover:text-gray-700"
@@ -362,8 +367,13 @@ const Orderbook = ({
               )}
             </button>
             <button
-              onClick={() => handleTabChange("trades")}
-              className={`px-4 py-2 text-sm font-medium transition-colors ml-6 relative ${
+              type="button"
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                handleTabChange("trades");
+              }}
+              className={`px-4 py-2 text-sm font-medium transition-colors ml-6 relative cursor-pointer ${
                 activeTab === "trades"
                   ? "text-black"
                   : "text-gray-500 hover:text-gray-700"
