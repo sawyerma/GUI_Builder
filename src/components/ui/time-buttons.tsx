@@ -67,11 +67,22 @@ const TimeButtons = () => {
       {displayIntervals.map((interval) => (
         <div
           key={interval}
-          className={`px-2 py-0.5 rounded text-[12.8px] cursor-pointer select-none border-0 ${
+          className={`cursor-pointer select-none ${
             activeTime === interval
               ? "bg-[#1a48d8] text-white"
               : "bg-gray-100 dark:bg-gray-700 text-[#222] dark:text-white hover:bg-gray-200 dark:hover:bg-gray-600"
           }`}
+          style={{
+            padding: "2px 8px",
+            borderRadius: "4px",
+            fontSize: "12.8px",
+            border: "none",
+            outline: "none",
+            boxShadow: "none",
+            borderWidth: "0",
+            borderStyle: "none",
+            borderColor: "transparent",
+          }}
           onClick={() => setActiveTime(interval)}
         >
           {interval}
@@ -81,7 +92,21 @@ const TimeButtons = () => {
       {/* Dropdown Button */}
       <div className="relative">
         <div
-          className="px-2 py-0.5 rounded bg-gray-100 dark:bg-gray-700 text-[#222] dark:text-white hover:bg-gray-200 dark:hover:bg-gray-600 flex items-center gap-1 text-[12.8px] cursor-pointer select-none border-0"
+          className="bg-gray-100 dark:bg-gray-700 text-[#222] dark:text-white hover:bg-gray-200 dark:hover:bg-gray-600 cursor-pointer select-none"
+          style={{
+            padding: "2px 8px",
+            borderRadius: "4px",
+            display: "flex",
+            alignItems: "center",
+            gap: "4px",
+            fontSize: "12.8px",
+            border: "none",
+            outline: "none",
+            boxShadow: "none",
+            borderWidth: "0",
+            borderStyle: "none",
+            borderColor: "transparent",
+          }}
           onClick={() => setIsDropdownOpen(!isDropdownOpen)}
         >
           ▽
