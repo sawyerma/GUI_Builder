@@ -181,32 +181,6 @@ const ChartSection = () => {
 
   return (
     <div className="mt-1" ref={containerRef}>
-      {/* Drop Zones Overlay */}
-      {dragState.isDragging && (
-        <div className="fixed inset-0 z-50 pointer-events-none">
-          <div className="relative w-full h-full">
-            {/* Horizontal Zone */}
-            <div className="absolute top-1/4 right-8 w-32 h-32 bg-blue-200/50 border-2 border-blue-400 border-dashed rounded-lg flex items-center justify-center">
-              <span className="text-blue-600 font-medium text-sm">
-                ↔ Horizontal
-              </span>
-            </div>
-            {/* Vertical Zone */}
-            <div className="absolute top-1/2 left-1/4 w-32 h-32 bg-green-200/50 border-2 border-green-400 border-dashed rounded-lg flex items-center justify-center">
-              <span className="text-green-600 font-medium text-sm">
-                ↕ Vertikal
-              </span>
-            </div>
-            {/* Fullwidth Zone */}
-            <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 w-40 h-20 bg-purple-200/50 border-2 border-purple-400 border-dashed rounded-lg flex items-center justify-center">
-              <span className="text-purple-600 font-medium text-sm">
-                ⬜ Vollbreite
-              </span>
-            </div>
-          </div>
-        </div>
-      )}
-
       {/* Dynamic Layout */}
       {renderLayout()}
 
