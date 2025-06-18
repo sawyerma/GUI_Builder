@@ -6,13 +6,10 @@ const ChartSection = () => {
         [Chart]
       </div>
 
-      {/* Sidebar with Orderbook and Trades */}
+      {/* Sidebar with Orderbook */}
       <div className="flex flex-col gap-4 w-[320px]">
-        <div className="bg-white rounded-xl shadow min-h-[240px] flex items-center justify-center text-gray-400 text-[0.84rem]">
+        <div className="bg-white rounded-xl shadow min-h-[448px] flex items-center justify-center text-gray-400 text-[0.84rem]">
           [Orderbuch]
-        </div>
-        <div className="bg-white rounded-xl shadow min-h-[120px] flex items-center justify-center text-gray-400 text-[0.84rem]">
-          [Trades]
         </div>
       </div>
     </div>

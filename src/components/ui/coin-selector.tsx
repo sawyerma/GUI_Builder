@@ -11,6 +11,9 @@ interface CoinData {
   histStatus: "green" | "red";
 }
 
+type SortField = "favorite" | "coin" | "price" | "change" | "live" | "hist";
+type SortDirection = "asc" | "desc" | "random";
+
 const CoinSelector = ({
   selectedCoin,
   onCoinSelect,
@@ -19,8 +22,10 @@ const CoinSelector = ({
   onCoinSelect: (coin: CoinData) => void;
 }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [sortField, setSortField] = useState<SortField>("coin");
+  const [sortDirection, setSortDirection] = useState<SortDirection>("asc");
 
-  const coins: CoinData[] = [
+  const [coins, setCoins] = useState<CoinData[]>([
     {
       id: "1",
       symbol: "BTC/USDT",
@@ -61,7 +66,69 @@ const CoinSelector = ({
       liveStatus: "red",
       histStatus: "red",
     },
-  ];
+  ]);
+
+  const sortCoins = (field: SortField) => {
+    let newDirection: SortDirection = "asc";
+
+    if (sortField === field) {
+      if (sortDirection === "asc") {
+        newDirection = "desc";
+      } else if (sortDirection === "desc") {
+        newDirection = field === "coin" ? "random" : "asc";
+      } else {
+        newDirection = "asc";
+      }
+    }
+
+    setSortField(field);
+    setSortDirection(newDirection);
+
+    const sortedCoins = [...coins].sort((a, b) => {
+      if (newDirection === "random") {
+        return Math.random() - 0.5;
+      }
+
+      let aValue: any, bValue: any;
+
+      switch (field) {
+        case "favorite":
+          aValue = a.isFavorite ? 1 : 0;
+          bValue = b.isFavorite ? 1 : 0;
+          break;
+        case "coin":
+          aValue = a.symbol;
+          bValue = b.symbol;
+          break;
+        case "price":
+          aValue = parseFloat(a.price.replace(/,/g, ""));
+          bValue = parseFloat(b.price.replace(/,/g, ""));
+          break;
+        case "change":
+          aValue = a.changePercent;
+          bValue = b.changePercent;
+          break;
+        case "live":
+          aValue = a.liveStatus === "green" ? 1 : 0;
+          bValue = b.liveStatus === "green" ? 1 : 0;
+          break;
+        case "hist":
+          aValue = a.histStatus === "green" ? 1 : 0;
+          bValue = b.histStatus === "green" ? 1 : 0;
+          break;
+        default:
+          return 0;
+      }
+
+      if (newDirection === "asc") {
+        return aValue > bValue ? 1 : aValue < bValue ? -1 : 0;
+      } else {
+        return aValue < bValue ? 1 : aValue > bValue ? -1 : 0;
+      }
+    });
+
+    setCoins(sortedCoins);
+  };
 
   const handleCoinSelect = (coin: CoinData) => {
     onCoinSelect(coin);
@@ -70,8 +137,11 @@ const CoinSelector = ({
 
   const toggleFavorite = (coinId: string, e: React.MouseEvent) => {
     e.stopPropagation();
-    // Here you could add state management for favorites
-    console.log(`Toggle favorite for coin ${coinId}`);
+    setCoins(
+      coins.map((coin) =>
+        coin.id === coinId ? { ...coin, isFavorite: !coin.isFavorite } : coin,
+      ),
+    );
   };
 
   return (
@@ -91,16 +161,53 @@ const CoinSelector = ({
           <div className="min-w-[441px] rounded-[13px] shadow-[0_3px_22px_0_rgba(40,60,120,0.13)] border-[1px] border-[#eee] bg-white overflow-hidden">
             {/* Header */}
             <div className="flex items-center px-[21px] bg-[#f7fafd] font-bold h-10 text-[#65717c] tracking-[0.03em] border-b border-[#f3f3f3] font-sans text-[11px]">
-              <div className="w-[48px] text-center text-[#ffd600] text-[11px]">
+              <div
+                className="w-[48px] text-center text-[#ffd600] text-[11px] cursor-pointer hover:bg-[#f0f8ff] transition-colors"
+                onClick={() => sortCoins("favorite")}
+              >
                 ★
               </div>
-              <div className="w-[110px] font-bold text-[11px]">Coin</div>
-              <div className="w-[105px] text-right text-[11px]">
-                Letzter Preis
+              <div
+                className="w-[110px] font-bold text-[11px] cursor-pointer hover:bg-[#f0f8ff] transition-colors"
+                onClick={() => sortCoins("coin")}
+              >
+                Coin{" "}
+                {sortField === "coin" &&
+                  (sortDirection === "asc"
+                    ? "↑"
+                    : sortDirection === "desc"
+                      ? "↓"
+                      : "~")}
               </div>
-              <div className="w-[135px] text-right text-[11px]">Δ 24h</div>
-              <div className="w-[49px] text-center text-[11px]">Live</div>
-              <div className="w-[49px] text-center text-[11px]">Hist</div>
+              <div
+                className="w-[105px] text-right text-[11px] cursor-pointer hover:bg-[#f0f8ff] transition-colors"
+                onClick={() => sortCoins("price")}
+              >
+                Price{" "}
+                {sortField === "price" && (sortDirection === "asc" ? "↑" : "↓")}
+              </div>
+              <div
+                className="w-[135px] text-right text-[11px] cursor-pointer hover:bg-[#f0f8ff] transition-colors"
+                onClick={() => sortCoins("change")}
+              >
+                Δ 24h{" "}
+                {sortField === "change" &&
+                  (sortDirection === "asc" ? "↑" : "↓")}
+              </div>
+              <div
+                className="w-[49px] text-center text-[11px] cursor-pointer hover:bg-[#f0f8ff] transition-colors"
+                onClick={() => sortCoins("live")}
+              >
+                Live{" "}
+                {sortField === "live" && (sortDirection === "asc" ? "↑" : "↓")}
+              </div>
+              <div
+                className="w-[49px] text-center text-[11px] cursor-pointer hover:bg-[#f0f8ff] transition-colors"
+                onClick={() => sortCoins("hist")}
+              >
+                Hist{" "}
+                {sortField === "hist" && (sortDirection === "asc" ? "↑" : "↓")}
+              </div>
             </div>
 
             {/* Coin Rows */}
