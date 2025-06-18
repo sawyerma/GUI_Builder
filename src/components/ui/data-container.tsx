@@ -1,3 +1,5 @@
+import { useState, useEffect } from "react";
+
 interface DataContainerProps {
   children: React.ReactNode;
   className?: string;
