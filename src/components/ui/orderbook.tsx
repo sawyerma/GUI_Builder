@@ -421,13 +421,13 @@ const Orderbook = ({
 
                   {/* Order Row */}
                   <div className="relative grid grid-cols-3 text-xs py-1 px-4 hover:bg-gray-50 dark:hover:bg-gray-700">
-                    <div className="text-red-500 font-mono">
+                    <div className="text-red-500 font-medium">
                       {formatNumber(order.price, 2)}
                     </div>
-                    <div className="text-center text-gray-600 font-mono">
+                    <div className="text-center text-gray-600 font-medium">
                       {order.amount.toFixed(6)}
                     </div>
-                    <div className="text-right text-gray-600 font-mono">
+                    <div className="text-right text-gray-600 font-medium">
                       {formatNumber(order.total)}
                     </div>
                   </div>
@@ -461,13 +461,13 @@ const Orderbook = ({
 
                   {/* Order Row */}
                   <div className="relative grid grid-cols-3 text-xs py-1 px-4 hover:bg-gray-50 dark:hover:bg-gray-700">
-                    <div className="text-green-500 font-mono">
+                    <div className="text-green-500 font-medium">
                       {formatNumber(order.price, 2)}
                     </div>
-                    <div className="text-center text-gray-600 font-mono">
+                    <div className="text-center text-gray-600 font-medium">
                       {order.amount.toFixed(6)}
                     </div>
-                    <div className="text-right text-gray-600 font-mono">
+                    <div className="text-right text-gray-600 font-medium">
                       {formatNumber(order.total)}
                     </div>
                   </div>
