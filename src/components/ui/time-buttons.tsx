@@ -84,7 +84,7 @@ const TimeButtons = () => {
           className="px-2 py-0.5 rounded bg-gray-100 dark:bg-gray-700 text-[#222] dark:text-white hover:bg-gray-200 dark:hover:bg-gray-600 flex items-center gap-1 text-[12.8px]"
           onClick={() => setIsDropdownOpen(!isDropdownOpen)}
         >
-          ⌄
+          ∨
         </button>
 
         {/* Dropdown Menu */}
