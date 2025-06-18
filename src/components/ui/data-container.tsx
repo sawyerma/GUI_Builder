@@ -34,6 +34,21 @@ interface DataRowProps {
 }
 
 export const DataRow = ({ data, onClick, layout = "trades" }: DataRowProps) => {
+  // Get proper text colors for dark mode
+  const getTextColor = (
+    originalColor: string | undefined,
+    column: "col1" | "col2" | "col3",
+  ) => {
+    if (layout === "trades") {
+      if (column === "col1") {
+        return originalColor || "text-gray-600 dark:text-white";
+      }
+      // Force white text for col2 and col3 in trades
+      return "text-gray-600 dark:text-white";
+    }
+    return originalColor || "text-gray-600 dark:text-white";
+  };
+
   return (
     <div
       className="relative cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700"
@@ -52,9 +67,7 @@ export const DataRow = ({ data, onClick, layout = "trades" }: DataRowProps) => {
 
       {/* Data Row */}
       <div className="relative grid grid-cols-3 text-xs py-1 px-4">
-        <div
-          className={`font-medium ${data.col1Color ? data.col1Color : "text-gray-600 dark:text-white"}`}
-        >
+        <div className={`font-medium ${getTextColor(data.col1Color, "col1")}`}>
           {layout === "trades" && data.arrow && (
             <span className="flex items-center">
               <span>{data.col1}</span>
@@ -66,12 +79,12 @@ export const DataRow = ({ data, onClick, layout = "trades" }: DataRowProps) => {
           {(layout === "orderbook" || !data.arrow) && <span>{data.col1}</span>}
         </div>
         <div
-          className={`text-center font-medium ${data.col2Color ? data.col2Color.replace("text-gray-600", "text-gray-600 dark:text-white") : "text-gray-600 dark:text-white"}`}
+          className={`text-center font-medium ${getTextColor(data.col2Color, "col2")}`}
         >
           {data.col2}
         </div>
         <div
-          className={`text-right ${data.col3Color ? data.col3Color.replace("text-gray-500", "text-gray-500 dark:text-white") : "text-gray-600 dark:text-white"} ${layout === "orderbook" ? "font-medium" : "text-xs font-medium"}`}
+          className={`text-right ${getTextColor(data.col3Color, "col3")} ${layout === "orderbook" ? "font-medium" : "text-xs font-medium"}`}
         >
           {data.col3}
         </div>
