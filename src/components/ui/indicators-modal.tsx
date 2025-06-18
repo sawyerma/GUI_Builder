@@ -155,105 +155,113 @@ const IndicatorsModal = ({ isOpen, onClose }: IndicatorsModalProps) => {
     }
 
     return (
-      <div className="flex-1 p-6">
-        {/* Search Bar */}
-        <div className="relative mb-6">
-          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
-          <input
-            type="text"
-            placeholder="Suche"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-10 pr-4 py-2 bg-gray-700 border border-gray-600 rounded text-white placeholder-gray-400 focus:outline-none focus:border-blue-500"
-          />
-        </div>
-
-        {/* Table Header */}
-        <div className="grid grid-cols-12 gap-4 mb-2 text-xs text-gray-400 font-medium pb-2 border-b border-gray-600">
-          <div className="col-span-1"></div>
-          <div className="col-span-5">SKRIPTNAME</div>
-          <div className="col-span-3"></div>
-          <div className="col-span-3 text-right"></div>
-        </div>
-
-        {/* Indicators List */}
-        <div className="space-y-1">
-          {displayList.map((indicator, index) => (
-            <div
-              key={index}
-              className="grid grid-cols-12 gap-4 py-3 hover:bg-gray-700 rounded transition-colors cursor-pointer group"
-            >
-              {/* Star */}
-              <div className="col-span-1 flex items-center">
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    toggleFavorite(indicator.name);
-                  }}
-                  className={`transition-colors ${
-                    favorites.has(indicator.name)
-                      ? "text-yellow-400"
-                      : "text-gray-500 hover:text-yellow-400"
-                  }`}
-                >
-                  <Star
-                    className="w-4 h-4"
-                    fill={
-                      favorites.has(indicator.name) ? "currentColor" : "none"
-                    }
-                  />
-                </button>
-              </div>
-
-              {/* Indicator Name & Tags */}
-              <div className="col-span-5 flex items-center space-x-2">
-                <span className="text-white font-medium">{indicator.name}</span>
-                {indicator.isPremium && (
-                  <span className="bg-blue-600 text-white text-xs px-1.5 py-0.5 rounded font-medium">
-                    EP
-                  </span>
-                )}
-                {indicator.isProtected && (
-                  <div className="w-3 h-3 bg-green-500 rounded-full flex items-center justify-center">
-                    <div className="w-1.5 h-1.5 bg-white rounded-full"></div>
-                  </div>
-                )}
-              </div>
-
-              {/* Author */}
-              <div className="col-span-3 flex items-center">
-                <span className="text-blue-400 text-sm hover:text-blue-300 transition-colors">
-                  {indicator.author}
-                </span>
-              </div>
-
-              {/* Rating */}
-              <div className="col-span-3 flex items-center justify-end">
-                <span className="text-gray-300 text-sm">
-                  {indicator.rating}
-                </span>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {displayList.length === 0 && (
-          <div className="text-center py-12 text-gray-400">
-            <p>Keine Indikatoren gefunden</p>
-            {activeSection === "Favoriten" && (
-              <p className="text-sm mt-2">
-                Füge Indikatoren zu deinen Favoriten hinzu, um sie hier zu
-                sehen.
-              </p>
-            )}
+      <div className="flex-1 flex flex-col h-full">
+        {/* Search Bar - Fixed at top */}
+        <div className="p-6 pb-4 flex-shrink-0">
+          <div className="relative">
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
+            <input
+              type="text"
+              placeholder="Suche"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-full pl-10 pr-4 py-2 bg-gray-700 border border-gray-600 rounded text-white placeholder-gray-400 focus:outline-none focus:border-blue-500"
+            />
           </div>
-        )}
+        </div>
+
+        {/* Table Header - Fixed */}
+        <div className="px-6 pb-2 flex-shrink-0">
+          <div className="grid grid-cols-12 gap-4 text-xs text-gray-400 font-medium pb-2 border-b border-gray-600">
+            <div className="col-span-1"></div>
+            <div className="col-span-5">SKRIPTNAME</div>
+            <div className="col-span-3"></div>
+            <div className="col-span-3 text-right"></div>
+          </div>
+        </div>
+
+        {/* Scrollable Indicators List */}
+        <div className="flex-1 overflow-y-auto px-6 pb-6">
+          <div className="space-y-1">
+            {displayList.map((indicator, index) => (
+              <div
+                key={index}
+                className="grid grid-cols-12 gap-4 py-3 hover:bg-gray-700 rounded transition-colors cursor-pointer group"
+              >
+                {/* Star */}
+                <div className="col-span-1 flex items-center">
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      toggleFavorite(indicator.name);
+                    }}
+                    className={`transition-colors ${
+                      favorites.has(indicator.name)
+                        ? "text-yellow-400"
+                        : "text-gray-500 hover:text-yellow-400"
+                    }`}
+                  >
+                    <Star
+                      className="w-4 h-4"
+                      fill={
+                        favorites.has(indicator.name) ? "currentColor" : "none"
+                      }
+                    />
+                  </button>
+                </div>
+
+                {/* Indicator Name & Tags */}
+                <div className="col-span-5 flex items-center space-x-2">
+                  <span className="text-white font-medium">
+                    {indicator.name}
+                  </span>
+                  {indicator.isPremium && (
+                    <span className="bg-blue-600 text-white text-xs px-1.5 py-0.5 rounded font-medium">
+                      EP
+                    </span>
+                  )}
+                  {indicator.isProtected && (
+                    <div className="w-3 h-3 bg-green-500 rounded-full flex items-center justify-center">
+                      <div className="w-1.5 h-1.5 bg-white rounded-full"></div>
+                    </div>
+                  )}
+                </div>
+
+                {/* Author */}
+                <div className="col-span-3 flex items-center">
+                  <span className="text-blue-400 text-sm hover:text-blue-300 transition-colors">
+                    {indicator.author}
+                  </span>
+                </div>
+
+                {/* Rating */}
+                <div className="col-span-3 flex items-center justify-end">
+                  <span className="text-gray-300 text-sm">
+                    {indicator.rating}
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {displayList.length === 0 && (
+            <div className="text-center py-12 text-gray-400">
+              <p>Keine Indikatoren gefunden</p>
+              {activeSection === "Favoriten" && (
+                <p className="text-sm mt-2">
+                  Füge Indikatoren zu deinen Favoriten hinzu, um sie hier zu
+                  sehen.
+                </p>
+              )}
+            </div>
+          )}
+        </div>
       </div>
     );
   };
 
   const renderDefaultSection = () => (
-    <div className="flex-1 p-6">
+    <div className="flex-1 p-6 h-full overflow-y-auto">
       <h3 className="text-lg font-medium text-white mb-4">{activeSection}</h3>
       <p className="text-gray-400">
         Inhalte für {activeSection.toLowerCase()} sind noch nicht verfügbar.
@@ -295,9 +303,9 @@ const IndicatorsModal = ({ isOpen, onClose }: IndicatorsModalProps) => {
         </div>
 
         {/* Content */}
-        <div className="flex w-full mt-16">
+        <div className="flex w-full mt-16 h-[calc(100%-4rem)]">
           {/* Sidebar */}
-          <div className="w-64 bg-gray-700 border-r border-gray-600">
+          <div className="w-64 bg-gray-700 border-r border-gray-600 flex-shrink-0">
             <div className="p-0">
               {sidebarItems.map((item) => (
                 <button
