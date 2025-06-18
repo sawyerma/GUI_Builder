@@ -82,7 +82,7 @@ const TradingNav = ({ onTradingModeChange }: TradingNavProps) => {
               onClick={() => handleTabClick(item.name)}
             >
               {item.name}
-              {item.hasDropdown && " ∨"}
+              {item.hasDropdown && " ↓"}
             </button>
 
             {/* Market Dropdown */}
