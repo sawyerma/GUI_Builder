@@ -220,7 +220,9 @@ const TimeButtons = () => {
             strokeLinejoin="round"
           />
         </svg>
-        Indikatoren ▽
+        <span>
+          <p>Indikatoren</p>
+        </span>
       </div>
 
       {/* Grid View Button */}
