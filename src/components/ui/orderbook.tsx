@@ -1,4 +1,5 @@
 import { useState } from "react";
+import DataContainer, { DataRow } from "./data-container";
 
 interface OrderbookEntry {
   price: number;
@@ -20,6 +21,7 @@ interface OrderbookProps {
   trades?: Trade[];
   currentPrice?: number;
   onDataUpdate?: (data: { orders: OrderbookEntry[]; trades: Trade[] }) => void;
+  onTabChange?: (tab: "orderbook" | "trades") => void;
 }
 
 const Orderbook = ({
@@ -27,10 +29,18 @@ const Orderbook = ({
   trades = [],
   currentPrice = 104534.14,
   onDataUpdate,
+  onTabChange,
 }: OrderbookProps) => {
   const [activeTab, setActiveTab] = useState<"orderbook" | "trades">(
     "orderbook",
   );
+
+  const handleTabChange = (tab: "orderbook" | "trades") => {
+    setActiveTab(tab);
+    if (onTabChange) {
+      onTabChange(tab);
+    }
+  };
 
   // Dummy data for demonstration - will be replaced by real data
   const dummyOrders: OrderbookEntry[] = [
@@ -285,6 +295,32 @@ const Orderbook = ({
   const ordersToShow = orders.length > 0 ? orders : dummyOrders;
   const tradesToShow = trades.length > 0 ? trades : dummyTrades;
 
+  // Convert your external data to display format
+  const formatTradeData = (trades: Trade[]) => {
+    return trades.map((trade) => ({
+      col1: formatNumber(trade.price, 2),
+      col2: trade.amount.toFixed(6),
+      col3: trade.time,
+      col1Color: trade.side === "buy" ? "text-green-500" : "text-red-500",
+      col2Color: "text-gray-600",
+      col3Color: "text-gray-500",
+      arrow: trade.side === "buy" ? ("up" as const) : ("down" as const),
+    }));
+  };
+
+  const formatOrderData = (orders: OrderbookEntry[]) => {
+    return orders.map((order) => ({
+      col1: formatNumber(order.price, 2),
+      col2: order.amount.toFixed(6),
+      col3: formatNumber(order.total),
+      col1Color: order.side === "buy" ? "text-green-500" : "text-red-500",
+      col2Color: "text-gray-600",
+      col3Color: "text-gray-600",
+      backgroundColor: order.side === "buy" ? "bg-green-50" : "bg-red-50",
+      volumeWidth: getVolumeWidth(order.total, maxTotal),
+    }));
+  };
+
   const sellOrders = ordersToShow
     .filter((order) => order.side === "sell")
     .sort((a, b) => b.price - a.price);
@@ -310,26 +346,32 @@ const Orderbook = ({
       {/* Header with Tabs */}
       <div className="border-b border-gray-200 px-4 pt-4">
         <div className="flex items-center justify-between mb-3">
-          <div className="flex">
+          <div className="flex relative">
             <button
-              onClick={() => setActiveTab("orderbook")}
-              className={`px-4 py-2 text-sm font-medium border-b-2 transition-colors ${
+              onClick={() => handleTabChange("orderbook")}
+              className={`px-4 py-2 text-sm font-medium transition-colors relative ${
                 activeTab === "orderbook"
-                  ? "border-black text-black"
-                  : "border-transparent text-gray-500 hover:text-gray-700"
+                  ? "text-black"
+                  : "text-gray-500 hover:text-gray-700"
               }`}
             >
               Orderbuch
+              {activeTab === "orderbook" && (
+                <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-black"></div>
+              )}
             </button>
             <button
-              onClick={() => setActiveTab("trades")}
-              className={`px-4 py-2 text-sm font-medium border-b-2 transition-colors ml-6 ${
+              onClick={() => handleTabChange("trades")}
+              className={`px-4 py-2 text-sm font-medium transition-colors ml-6 relative ${
                 activeTab === "trades"
-                  ? "border-black text-black"
-                  : "border-transparent text-gray-500 hover:text-gray-700"
+                  ? "text-black"
+                  : "text-gray-500 hover:text-gray-700"
               }`}
             >
               Markt-Trades
+              {activeTab === "trades" && (
+                <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-black"></div>
+              )}
             </button>
           </div>
 
@@ -459,33 +501,18 @@ const Orderbook = ({
           </div>
         ) : (
           /* Trades Tab */
-          <div className="h-full overflow-y-auto">
-            {tradesToShow.map((trade) => (
-              <div
-                key={trade.id}
-                className="grid grid-cols-3 text-xs py-1 px-4 hover:bg-gray-50"
-              >
-                <div className="flex items-center">
-                  <span
-                    className={`font-mono ${trade.side === "buy" ? "text-green-500" : "text-red-500"}`}
-                  >
-                    {formatNumber(trade.price, 2)}
-                  </span>
-                  <span
-                    className={`ml-1 text-xs ${trade.side === "buy" ? "text-green-500" : "text-red-500"}`}
-                  >
-                    {trade.side === "buy" ? "↑" : "↓"}
-                  </span>
-                </div>
-                <div className="text-center text-gray-600 font-mono">
-                  {trade.amount.toFixed(6)}
-                </div>
-                <div className="text-right text-gray-500 text-xs">
-                  {trade.time}
-                </div>
-              </div>
+          <DataContainer>
+            {formatTradeData(tradesToShow).map((tradeData, index) => (
+              <DataRow
+                key={tradesToShow[index]?.id || index}
+                data={tradeData}
+                layout="trades"
+                onClick={() => {
+                  console.log("Trade clicked:", tradesToShow[index]);
+                }}
+              />
             ))}
-          </div>
+          </DataContainer>
         )}
       </div>
     </div>
