@@ -83,7 +83,7 @@ const Index = () => {
         <TimeButtons />
 
         {/* Main Content: Chart + Orderbook */}
-        <ChartSection />
+        <ChartSection selectedCoin={selectedCoin} />
       </div>
     </ThemeProvider>
   );

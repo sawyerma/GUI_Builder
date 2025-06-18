@@ -8,7 +8,11 @@ import Orderbook from "./orderbook";
 import TradingChart from "./trading-chart";
 import LatencyIndicators from "./latency-indicators";
 
-const ChartSection = () => {
+const ChartSection = ({
+  selectedCoin = "BTC/USDT",
+}: {
+  selectedCoin?: string;
+}) => {
   return (
     <div className="mt-1">
       <div className="h-[500px]">
@@ -28,7 +32,7 @@ const ChartSection = () => {
           {/* Orderbook Panel */}
           <ResizablePanel defaultSize={25} minSize={20} maxSize={50}>
             <div className="h-full">
-              <Orderbook selectedCoin="BTC/USDT" />
+              <Orderbook selectedCoin={selectedCoin} />
             </div>
           </ResizablePanel>
         </ResizablePanelGroup>
