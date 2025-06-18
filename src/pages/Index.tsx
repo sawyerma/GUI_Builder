@@ -1,41 +1,33 @@
+import TradingNav from "../components/ui/trading-nav";
+import CoinTable from "../components/ui/coin-table";
+import PriceDisplay from "../components/ui/price-display";
+import TimeButtons from "../components/ui/time-buttons";
+import ChartSection from "../components/ui/chart-section";
+import LatencyIndicators from "../components/ui/latency-indicators";
+
 const Index = () => {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-100 to-slate-200">
-      <div className="text-center">
-        {/* TODO: replace everything here with the actual app! */}
-        <h1 className="text-2xl font-semibold text-slate-800 flex items-center justify-center gap-3">
-          <svg
-            className="animate-spin h-8 w-8 text-slate-400"
-            viewBox="0 0 50 50"
-          >
-            <circle
-              className="opacity-30"
-              cx="25"
-              cy="25"
-              r="20"
-              stroke="currentColor"
-              strokeWidth="5"
-              fill="none"
-            />
-            <circle
-              className="text-slate-600"
-              cx="25"
-              cy="25"
-              r="20"
-              stroke="currentColor"
-              strokeWidth="5"
-              fill="none"
-              strokeDasharray="100"
-              strokeDashoffset="75"
-            />
-          </svg>
-          Generating your app...
-        </h1>
-        <p className="mt-4 text-slate-600 max-w-md">
-          Watch the chat on the left for updates that might need your attention
-          to finish generating
-        </p>
+    <div className="bg-[#fbfcfd] text-[#222] font-sans min-h-screen px-6 py-5">
+      {/* Top Navigation */}
+      <TradingNav />
+
+      {/* Market & Price Section */}
+      <div className="flex items-start gap-8 mb-1">
+        {/* Coin Dropdown Table */}
+        <CoinTable />
+
+        {/* Price Display */}
+        <PriceDisplay />
       </div>
+
+      {/* Time Buttons */}
+      <TimeButtons />
+
+      {/* Main Content: Chart + Orderbook */}
+      <ChartSection />
+
+      {/* Latency Indicators */}
+      <LatencyIndicators />
     </div>
   );
 };
