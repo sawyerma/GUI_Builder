@@ -1,17 +1,35 @@
+import {
+  ResizableHandle,
+  ResizablePanel,
+  ResizablePanelGroup,
+} from "./resizable";
+
 const ChartSection = () => {
   return (
-    <div className="flex gap-4 mt-1">
-      {/* Main Chart */}
-      <div className="bg-white rounded-xl shadow min-h-[360px] flex-1 flex items-center justify-center text-[0.94rem] text-gray-300">
-        [Chart]
-      </div>
+    <div className="mt-1 h-[500px]">
+      <ResizablePanelGroup
+        direction="horizontal"
+        className="min-h-[500px] rounded-lg border"
+      >
+        {/* Main Chart Panel */}
+        <ResizablePanel defaultSize={75} minSize={50}>
+          <div className="bg-white rounded-xl shadow h-full flex items-center justify-center p-4">
+            {/* Chart Container */}
+            <div className="chart-container bg-white rounded-lg shadow-sm border min-w-[600px] min-h-[350px] w-full h-full flex items-center justify-center">
+              <span className="text-gray-400 text-[0.94rem]">[Chart]</span>
+            </div>
+          </div>
+        </ResizablePanel>
 
-      {/* Sidebar with Orderbook */}
-      <div className="flex flex-col gap-4 w-[320px]">
-        <div className="bg-white rounded-xl shadow min-h-[448px] flex items-center justify-center text-gray-400 text-[0.84rem]">
-          [Orderbuch]
-        </div>
-      </div>
+        <ResizableHandle withHandle />
+
+        {/* Orderbook Panel */}
+        <ResizablePanel defaultSize={25} minSize={20}>
+          <div className="bg-white rounded-xl shadow h-full flex items-center justify-center">
+            <span className="text-gray-400 text-[0.84rem]">[Orderbuch]</span>
+          </div>
+        </ResizablePanel>
+      </ResizablePanelGroup>
     </div>
   );
 };
