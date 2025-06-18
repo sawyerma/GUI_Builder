@@ -53,7 +53,7 @@ export const DataRow = ({ data, onClick, layout = "trades" }: DataRowProps) => {
       {/* Data Row */}
       <div className="relative grid grid-cols-3 text-xs py-1 px-4">
         <div
-          className={`font-medium ${data.col1Color || "text-gray-600 dark:text-white"}`}
+          className={`font-medium ${data.col1Color ? data.col1Color : "text-gray-600 dark:text-white"}`}
         >
           {layout === "trades" && data.arrow && (
             <span className="flex items-center">
@@ -66,12 +66,12 @@ export const DataRow = ({ data, onClick, layout = "trades" }: DataRowProps) => {
           {(layout === "orderbook" || !data.arrow) && <span>{data.col1}</span>}
         </div>
         <div
-          className={`text-center font-medium ${data.col2Color || "text-gray-600 dark:text-white"}`}
+          className={`text-center font-medium ${data.col2Color ? data.col2Color.replace("text-gray-600", "text-gray-600 dark:text-white") : "text-gray-600 dark:text-white"}`}
         >
           {data.col2}
         </div>
         <div
-          className={`text-right ${data.col3Color || "text-gray-600 dark:text-white"} ${layout === "orderbook" ? "font-medium" : "text-xs font-medium"}`}
+          className={`text-right ${data.col3Color ? data.col3Color.replace("text-gray-500", "text-gray-500 dark:text-white") : "text-gray-600 dark:text-white"} ${layout === "orderbook" ? "font-medium" : "text-xs font-medium"}`}
         >
           {data.col3}
         </div>
