@@ -65,41 +65,27 @@ const TimeButtons = () => {
 
       {/* Display Buttons */}
       {displayIntervals.map((interval) => (
-        <button
+        <div
           key={interval}
-          className={`px-2 py-0.5 rounded text-[12.8px] ${
+          className={`px-2 py-0.5 rounded text-[12.8px] cursor-pointer select-none ${
             activeTime === interval
               ? "bg-[#1a48d8] text-white"
               : "bg-gray-100 dark:bg-gray-700 text-[#222] dark:text-white hover:bg-gray-200 dark:hover:bg-gray-600"
           }`}
-          style={{
-            border: "none !important",
-            outline: "none !important",
-            boxShadow: "none !important",
-            borderWidth: "0px !important",
-            borderStyle: "none !important",
-          }}
           onClick={() => setActiveTime(interval)}
         >
           {interval}
-        </button>
+        </div>
       ))}
 
       {/* Dropdown Button */}
       <div className="relative">
-        <button
-          className="px-2 py-0.5 rounded bg-gray-100 dark:bg-gray-700 text-[#222] dark:text-white hover:bg-gray-200 dark:hover:bg-gray-600 flex items-center gap-1 text-[12.8px]"
-          style={{
-            border: "none !important",
-            outline: "none !important",
-            boxShadow: "none !important",
-            borderWidth: "0px !important",
-            borderStyle: "none !important",
-          }}
+        <div
+          className="px-2 py-0.5 rounded bg-gray-100 dark:bg-gray-700 text-[#222] dark:text-white hover:bg-gray-200 dark:hover:bg-gray-600 flex items-center gap-1 text-[12.8px] cursor-pointer select-none"
           onClick={() => setIsDropdownOpen(!isDropdownOpen)}
         >
           ▽
-        </button>
+        </div>
 
         {/* Dropdown Menu */}
         {isDropdownOpen && (
