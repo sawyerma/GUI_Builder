@@ -9,8 +9,8 @@ const PriceDisplay = () => {
         <span className="text-base text-[#444] tracking-wider mt-0">SPOT</span>
       </div>
 
-      {/* Market Data */}
-      <div className="flex flex-wrap items-center gap-x-6 gap-y-1 text-[1.07rem] mt-2 font-sans">
+      {/* Market Data - All in one line */}
+      <div className="flex items-center gap-x-6 text-[1.07rem] mt-2 font-sans whitespace-nowrap">
         <span>
           Δ 24h: <span className="text-red-600 font-bold">−3.56%</span>
         </span>
