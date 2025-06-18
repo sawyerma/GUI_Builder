@@ -9,43 +9,32 @@ interface CoinData {
   histStatus: "green" | "red";
 }
 
-interface PriceDisplayProps {
-  currentCoinData: CoinData;
+interface MarketData {
+  change24h: string; // z.B. "-3.56%"
+  high24h: string; // z.B. "110.157,20"
+  low24h: string; // z.B. "99.666,04"
+  volume24h: string; // z.B. "6.08K"
+  turnover24h: string; // z.B. "645.65M"
+  category: string; // z.B. "Public Chain"
 }
 
-const PriceDisplay = ({ currentCoinData }: PriceDisplayProps) => {
-  // Generate sample market data based on selected coin
-  const getMarketData = (coin: CoinData) => {
-    const baseData = {
-      high: parseFloat(coin.price.replace(/,/g, "")) * 1.05,
-      low: parseFloat(coin.price.replace(/,/g, "")) * 0.95,
-      volume: coin.symbol.includes("BTC")
-        ? "6.08K"
-        : coin.symbol.includes("ETH")
-          ? "12.5K"
-          : "8.2K",
-      turnover: coin.symbol.includes("BTC")
-        ? "645.65M"
-        : coin.symbol.includes("ETH")
-          ? "42.8M"
-          : "1.1M",
-    };
+interface PriceDisplayProps {
+  currentCoinData: CoinData;
+  marketData?: MarketData; // Optional - falls nicht übergeben werden Dummy-Daten verwendet
+}
 
-    return {
-      high: baseData.high.toLocaleString("de-DE", {
-        minimumFractionDigits: 2,
-        maximumFractionDigits: 2,
-      }),
-      low: baseData.low.toLocaleString("de-DE", {
-        minimumFractionDigits: 2,
-        maximumFractionDigits: 2,
-      }),
-      volume: baseData.volume,
-      turnover: baseData.turnover,
-    };
+const PriceDisplay = ({ currentCoinData, marketData }: PriceDisplayProps) => {
+  // Fallback zu Dummy-Daten wenn keine MarketData übergeben werden
+  const defaultMarketData: MarketData = {
+    change24h: currentCoinData.change,
+    high24h: "108,957.20",
+    low24h: "103,399.96",
+    volume24h: "6.08K",
+    turnover24h: "645.65M",
+    category: "Public Chain",
   };
 
-  const marketData = getMarketData(currentCoinData);
+  const data = marketData || defaultMarketData;
 
   return (
     <div className="flex items-start gap-8 mb-1">
@@ -64,25 +53,25 @@ const PriceDisplay = ({ currentCoinData }: PriceDisplayProps) => {
           <span
             className={`font-bold ${currentCoinData.changePercent >= 0 ? "text-green-600" : "text-red-600"}`}
           >
-            {currentCoinData.change}
+            {data.change24h}
           </span>
         </span>
         <span>
-          24h Hoch: <b>{marketData.high}</b>
+          24h Hoch: <b>{data.high24h}</b>
         </span>
         <span>
-          24h Tief: <b>{marketData.low}</b>
+          24h Tief: <b>{data.low24h}</b>
         </span>
         <span>
           24h Vol ({currentCoinData.symbol.split("/")[0]}):{" "}
-          <b>{marketData.volume}</b>
+          <b>{data.volume24h}</b>
         </span>
         <span>
           24h Umsatz ({currentCoinData.symbol.split("/")[1]}):{" "}
-          <b>{marketData.turnover}</b>
+          <b>{data.turnover24h}</b>
         </span>
         <span>
-          Kategorie: <span className="font-bold">Public Chain</span>
+          Kategorie: <span className="font-bold">{data.category}</span>
         </span>
       </div>
     </div>

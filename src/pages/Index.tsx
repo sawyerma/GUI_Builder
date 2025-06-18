@@ -30,6 +30,16 @@ const Index = () => {
     histStatus: "green",
   });
 
+  // Deine Marktdaten als Variablen - diese kannst du von deinem Programm übergeben
+  const [marketData, setMarketData] = useState({
+    change24h: "-3.56%", // Variable 1
+    high24h: "110.157,20", // Variable 2
+    low24h: "99.666,04", // Variable 3
+    volume24h: "6.08K", // Variable 4
+    turnover24h: "645.65M", // Variable 5
+    category: "Public Chain", // Variable 6
+  });
+
   const handleCoinSelect = (coin: CoinData) => {
     setSelectedCoin(coin.symbol);
     setCurrentCoinData(coin);
@@ -52,7 +62,10 @@ const Index = () => {
 
         {/* Column 2: Price Display */}
         <div className="flex flex-col w-[83%] ml-5 max-lg:w-full max-lg:ml-0">
-          <PriceDisplay currentCoinData={currentCoinData} />
+          <PriceDisplay
+            currentCoinData={currentCoinData}
+            marketData={marketData}
+          />
         </div>
       </div>
 
