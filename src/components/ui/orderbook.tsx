@@ -31,9 +31,7 @@ const Orderbook = ({
   onDataUpdate,
   onTabChange,
 }: OrderbookProps) => {
-  const [activeTab, setActiveTab] = useState<"orderbook" | "trades">(
-    "orderbook",
-  );
+  const [activeTab, setActiveTab] = useState<"orderbook" | "trades">("trades");
 
   const handleTabChange = (tab: "orderbook" | "trades") => {
     console.log("Tab change requested:", tab); // Debug log
@@ -353,27 +351,9 @@ const Orderbook = ({
               onClick={(e) => {
                 e.preventDefault();
                 e.stopPropagation();
-                handleTabChange("orderbook");
-              }}
-              className={`px-4 py-2 text-sm font-medium transition-colors relative cursor-pointer ${
-                activeTab === "orderbook"
-                  ? "text-black dark:text-white"
-                  : "text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200"
-              }`}
-            >
-              Orderbuch
-              {activeTab === "orderbook" && (
-                <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-black"></div>
-              )}
-            </button>
-            <button
-              type="button"
-              onClick={(e) => {
-                e.preventDefault();
-                e.stopPropagation();
                 handleTabChange("trades");
               }}
-              className={`px-4 py-2 text-sm font-medium transition-colors ml-6 relative cursor-pointer ${
+              className={`px-4 py-2 text-sm font-medium transition-colors relative cursor-pointer ${
                 activeTab === "trades"
                   ? "text-black dark:text-white"
                   : "text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200"
@@ -381,7 +361,25 @@ const Orderbook = ({
             >
               Markt-Trades
               {activeTab === "trades" && (
-                <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-black"></div>
+                <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-black dark:bg-white"></div>
+              )}
+            </button>
+            <button
+              type="button"
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                handleTabChange("orderbook");
+              }}
+              className={`px-4 py-2 text-sm font-medium transition-colors ml-6 relative cursor-pointer ${
+                activeTab === "orderbook"
+                  ? "text-black dark:text-white"
+                  : "text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200"
+              }`}
+            >
+              Orderbuch
+              {activeTab === "orderbook" && (
+                <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-black dark:bg-white"></div>
               )}
             </button>
           </div>
