@@ -34,20 +34,8 @@ interface DataRowProps {
 }
 
 export const DataRow = ({ data, onClick, layout = "trades" }: DataRowProps) => {
-  // Get proper text colors for dark mode
-  const getTextColor = (
-    originalColor: string | undefined,
-    column: "col1" | "col2" | "col3",
-  ) => {
-    if (layout === "trades") {
-      if (column === "col1") {
-        return originalColor || "text-gray-600 dark:text-white";
-      }
-      // Force white text for col2 and col3 in trades
-      return "text-gray-600 dark:text-white";
-    }
-    return originalColor || "text-gray-600 dark:text-white";
-  };
+  // Detect if dark mode is active
+  const isDarkMode = document.documentElement.classList.contains("dark");
 
   return (
     <div
@@ -67,7 +55,18 @@ export const DataRow = ({ data, onClick, layout = "trades" }: DataRowProps) => {
 
       {/* Data Row */}
       <div className="relative grid grid-cols-3 text-xs py-1 px-4">
-        <div className={`font-medium ${getTextColor(data.col1Color, "col1")}`}>
+        <div
+          className="font-medium"
+          style={{
+            color: data.col1Color?.includes("green")
+              ? "#10b981"
+              : data.col1Color?.includes("red")
+                ? "#ef4444"
+                : isDarkMode
+                  ? "#ffffff"
+                  : "#4b5563",
+          }}
+        >
           {layout === "trades" && data.arrow && (
             <span className="flex items-center">
               <span>{data.col1}</span>
@@ -79,12 +78,14 @@ export const DataRow = ({ data, onClick, layout = "trades" }: DataRowProps) => {
           {(layout === "orderbook" || !data.arrow) && <span>{data.col1}</span>}
         </div>
         <div
-          className={`text-center font-medium ${getTextColor(data.col2Color, "col2")}`}
+          className="text-center font-medium"
+          style={{ color: isDarkMode ? "#ffffff" : "#4b5563" }}
         >
           {data.col2}
         </div>
         <div
-          className={`text-right ${getTextColor(data.col3Color, "col3")} ${layout === "orderbook" ? "font-medium" : "text-xs font-medium"}`}
+          className={`text-right ${layout === "orderbook" ? "font-medium" : "text-xs font-medium"}`}
+          style={{ color: isDarkMode ? "#ffffff" : "#4b5563" }}
         >
           {data.col3}
         </div>
