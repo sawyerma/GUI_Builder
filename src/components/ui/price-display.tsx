@@ -27,7 +27,7 @@ interface PriceDisplayProps {
 const PriceDisplay = ({
   currentCoinData,
   marketData,
-  tradingMode = "SPOT",
+  tradingMode = "Spot",
 }: PriceDisplayProps) => {
   // Fallback zu Dummy-Daten wenn keine MarketData übergeben werden
   const defaultMarketData: MarketData = {

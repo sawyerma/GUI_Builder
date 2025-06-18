@@ -40,8 +40,8 @@ const Index = () => {
     category: "Public Chain", // Variable 6
   });
 
-  // Trading Mode State (SPOT oder Futures-Option)
-  const [tradingMode, setTradingMode] = useState("SPOT");
+  // Trading Mode State (Spot oder Futures-Option)
+  const [tradingMode, setTradingMode] = useState("Spot");
 
   const handleCoinSelect = (coin: CoinData) => {
     setSelectedCoin(coin.symbol);

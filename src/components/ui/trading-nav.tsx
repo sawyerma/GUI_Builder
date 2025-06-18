@@ -8,7 +8,12 @@ const TradingNav = ({ onTradingModeChange }: TradingNavProps) => {
   const [activeTab, setActiveTab] = useState("Spot");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
-  const futuresOptions = [
+  const marketOptions = [
+    {
+      name: "Spot",
+      description: "Spot-Trading mit sofortiger Abwicklung",
+      icon: "💱",
+    },
     {
       name: "Futures-Übersicht",
       description: "Entdecken Sie alle Futures-Produkte",
@@ -37,8 +42,7 @@ const TradingNav = ({ onTradingModeChange }: TradingNavProps) => {
   ];
 
   const navItems = [
-    { name: "Spot", isActive: false },
-    { name: "Futures", hasDropdown: true },
+    { name: "Market", hasDropdown: true },
     { name: "AI" },
     { name: "ML" },
     { name: "Database" },
@@ -48,7 +52,7 @@ const TradingNav = ({ onTradingModeChange }: TradingNavProps) => {
   ];
 
   const handleTabClick = (itemName: string) => {
-    if (itemName === "Futures") {
+    if (itemName === "Market") {
       setIsDropdownOpen(!isDropdownOpen);
     } else {
       setActiveTab(itemName);
@@ -59,8 +63,8 @@ const TradingNav = ({ onTradingModeChange }: TradingNavProps) => {
     }
   };
 
-  const handleFuturesOptionClick = (option: string) => {
-    setActiveTab("Futures");
+  const handleMarketOptionClick = (option: string) => {
+    setActiveTab("Market");
     setIsDropdownOpen(false);
     if (onTradingModeChange) {
       onTradingModeChange(option);
@@ -83,14 +87,14 @@ const TradingNav = ({ onTradingModeChange }: TradingNavProps) => {
             {item.hasDropdown && " ▼"}
           </button>
 
-          {/* Futures Dropdown */}
-          {item.name === "Futures" && isDropdownOpen && (
+          {/* Market Dropdown */}
+          {item.name === "Market" && isDropdownOpen && (
             <div className="absolute top-full left-0 mt-2 z-50 w-80 bg-white rounded-lg shadow-xl border">
-              {futuresOptions.map((option) => (
+              {marketOptions.map((option) => (
                 <div
                   key={option.name}
                   className="flex items-center p-4 hover:bg-gray-50 cursor-pointer border-b border-gray-100 last:border-b-0"
-                  onClick={() => handleFuturesOptionClick(option.name)}
+                  onClick={() => handleMarketOptionClick(option.name)}
                 >
                   <div className="w-8 h-8 bg-black text-white rounded flex items-center justify-center mr-3 text-sm">
                     {option.icon}
