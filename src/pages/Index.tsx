@@ -1,5 +1,4 @@
 import TradingNav from "../components/ui/trading-nav";
-import CoinTable from "../components/ui/coin-table";
 import PriceDisplay from "../components/ui/price-display";
 import TimeButtons from "../components/ui/time-buttons";
 import ChartSection from "../components/ui/chart-section";
@@ -12,12 +11,19 @@ const Index = () => {
       <TradingNav />
 
       {/* Market & Price Section */}
-      <div className="flex items-start gap-8 mb-1">
-        {/* Coin Dropdown Table */}
-        <CoinTable />
+      <div className="flex gap-5 max-lg:flex-col max-lg:gap-0">
+        {/* Column 1: BTC/USDT Selector */}
+        <div className="flex flex-col w-[17%] max-lg:w-full max-lg:ml-0">
+          <button className="border-2 border-[#e4261c] text-[#e4261c] rounded px-0 py-1.5 font-medium bg-transparent my-auto">
+            BTC/USDT&nbsp;&nbsp;&nbsp;&nbsp;
+            <span>▼</span>
+          </button>
+        </div>
 
-        {/* Price Display */}
-        <PriceDisplay />
+        {/* Column 2: Price Display */}
+        <div className="flex flex-col w-[83%] ml-5 max-lg:w-full max-lg:ml-0">
+          <PriceDisplay />
+        </div>
       </div>
 
       {/* Time Buttons */}
