@@ -1,3 +1,5 @@
+import { useState, useEffect } from "react";
+
 interface CoinData {
   id: string;
   symbol: string;
