@@ -89,7 +89,7 @@ const TimeButtons = () => {
 
         {/* Dropdown Menu */}
         {isDropdownOpen && (
-          <div className="absolute top-full right-0 mt-1 z-50 w-80 bg-white dark:bg-gray-800 rounded-lg shadow-xl border dark:border-gray-600">
+          <div className="absolute top-full right-0 mt-1 z-50 w-80 bg-white dark:bg-gray-800 rounded-lg shadow-xl">
             <div className="p-4">
               <div className="flex items-center justify-between mb-4">
                 <h3 className="font-semibold text-gray-900 dark:text-white">
