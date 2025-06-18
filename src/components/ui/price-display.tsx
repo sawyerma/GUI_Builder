@@ -3,14 +3,14 @@ const PriceDisplay = () => {
     <div className="flex items-start gap-8 mb-1">
       {/* Price + Type */}
       <div className="flex flex-col items-start min-w-[170px]">
-        <span className="text-[2.2rem] font-bold text-[#e4261c] leading-tight tracking-wider">
+        <span className="text-[1.65rem] font-bold text-[#e4261c] leading-tight tracking-wider">
           104,911.62
         </span>
-        <span className="text-base text-[#444] tracking-wider mt-0">SPOT</span>
+        <span className="text-sm text-[#444] tracking-wider mt-0">SPOT</span>
       </div>
 
       {/* Market Data - All in one line */}
-      <div className="flex items-center gap-x-6 text-[1.07rem] mt-2 font-sans whitespace-nowrap">
+      <div className="flex items-center gap-x-6 text-[0.8rem] mt-2 font-sans whitespace-nowrap">
         <span>
           Δ 24h: <span className="text-red-600 font-bold">−3.56%</span>
         </span>

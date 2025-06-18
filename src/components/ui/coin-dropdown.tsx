@@ -63,19 +63,19 @@ const CoinDropdown = () => {
     <div className="min-w-[630px] rounded-[18px] shadow-[0_4px_32px_0_rgba(40,60,120,0.13)] border-[1.5px] border-[#eee] bg-white overflow-hidden mx-auto my-8">
       {/* Header */}
       <div className="flex items-center px-[30px] bg-[#f7fafd] font-bold h-14 text-[#65717c] tracking-[0.03em] border-b border-[#f3f3f3]">
-        <div className="w-[68px] text-center text-[1.04em]"></div>
-        <div className="w-[190px] font-bold text-[1.11em]">Coin</div>
-        <div className="w-[178px] text-right text-[1.11em]">Letzter Preis</div>
-        <div className="w-[160px] text-right text-[1.11em]">Δ 24h</div>
-        <div className="w-[70px] text-center text-[1.09em]">Live</div>
-        <div className="w-[70px] text-center text-[1.09em]">Hist</div>
+        <div className="w-[68px] text-center text-[0.78em]"></div>
+        <div className="w-[190px] font-bold text-[0.83em]">Coin</div>
+        <div className="w-[178px] text-right text-[0.83em]">Letzter Preis</div>
+        <div className="w-[160px] text-right text-[0.83em]">Δ 24h</div>
+        <div className="w-[70px] text-center text-[0.82em]">Live</div>
+        <div className="w-[70px] text-center text-[0.82em]">Hist</div>
       </div>
 
       {/* Rows */}
       {coins.map((coin) => (
         <div
           key={coin.id}
-          className={`flex items-center px-[30px] h-[62px] text-[1.45rem] cursor-pointer transition-colors border-b border-[#f3f3f3] ${
+          className={`flex items-center px-[30px] h-[62px] text-[1.1rem] cursor-pointer transition-colors border-b border-[#f3f3f3] ${
             coin.isActive
               ? "bg-[#eaffee]"
               : selectedCoin === coin.id
@@ -86,7 +86,7 @@ const CoinDropdown = () => {
         >
           <div className="w-[68px] text-center">
             <span
-              className={`text-[1.1em] ${
+              className={`text-[0.83em] ${
                 coin.isFavorite ? "text-[#ffd600]" : "text-[#e7e7e7]"
               }`}
             >

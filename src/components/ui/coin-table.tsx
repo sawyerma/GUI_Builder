@@ -59,7 +59,7 @@ const CoinTable = () => {
 
   return (
     <div className="mt-1">
-      <table className="min-w-[270px] text-sm rounded-lg shadow border overflow-hidden">
+      <table className="min-w-[270px] text-xs rounded-lg shadow border overflow-hidden">
         <thead>
           <tr className="bg-gray-50">
             <th className="px-2 py-1 text-yellow-500 w-7 text-center">★</th>
