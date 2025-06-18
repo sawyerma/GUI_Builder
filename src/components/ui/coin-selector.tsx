@@ -166,13 +166,13 @@ const CoinSelector = ({
             {/* Header */}
             <div className="flex items-center px-4 bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-gray-700 dark:to-gray-800 font-bold h-9 text-gray-600 dark:text-gray-300 tracking-wide font-sans text-[10px] uppercase">
               <div
-                className="w-[24px] text-center text-yellow-500 text-[10px] cursor-pointer hover:bg-white/50 dark:hover:bg-gray-600/50 rounded transition-all"
+                className="w-[28px] text-center text-yellow-500 text-[10px] cursor-pointer hover:bg-white/50 dark:hover:bg-gray-600/50 rounded transition-all"
                 onClick={() => sortCoins("favorite")}
               >
                 ★
               </div>
               <div
-                className="w-[70px] font-bold text-[10px] cursor-pointer hover:bg-white/50 dark:hover:bg-gray-600/50 rounded px-1 transition-all"
+                className="w-[80px] font-bold text-[10px] cursor-pointer hover:bg-white/50 dark:hover:bg-gray-600/50 rounded px-1 transition-all"
                 onClick={() => sortCoins("coin")}
               >
                 Coin{" "}
@@ -184,14 +184,14 @@ const CoinSelector = ({
                       : "~")}
               </div>
               <div
-                className="w-[65px] text-right text-[10px] cursor-pointer hover:bg-white/50 dark:hover:bg-gray-600/50 rounded px-1 transition-all"
+                className="w-[80px] text-right text-[10px] cursor-pointer hover:bg-white/50 dark:hover:bg-gray-600/50 rounded px-1 transition-all"
                 onClick={() => sortCoins("price")}
               >
                 Price{" "}
                 {sortField === "price" && (sortDirection === "asc" ? "↑" : "↓")}
               </div>
               <div
-                className="w-[55px] text-right text-[10px] cursor-pointer hover:bg-white/50 dark:hover:bg-gray-600/50 rounded px-1 transition-all"
+                className="w-[70px] text-right text-[10px] cursor-pointer hover:bg-white/50 dark:hover:bg-gray-600/50 rounded px-1 transition-all ml-4"
                 onClick={() => sortCoins("change")}
               >
                 24h{" "}
@@ -199,14 +199,14 @@ const CoinSelector = ({
                   (sortDirection === "asc" ? "↑" : "↓")}
               </div>
               <div
-                className="w-[26px] text-center text-[10px] cursor-pointer hover:bg-white/50 dark:hover:bg-gray-600/50 rounded px-1 transition-all"
+                className="w-[30px] text-center text-[10px] cursor-pointer hover:bg-white/50 dark:hover:bg-gray-600/50 rounded px-1 transition-all"
                 onClick={() => sortCoins("live")}
               >
                 L{" "}
                 {sortField === "live" && (sortDirection === "asc" ? "↑" : "↓")}
               </div>
               <div
-                className="w-[26px] text-center text-[10px] cursor-pointer hover:bg-white/50 dark:hover:bg-gray-600/50 rounded px-1 transition-all"
+                className="w-[30px] text-center text-[10px] cursor-pointer hover:bg-white/50 dark:hover:bg-gray-600/50 rounded px-1 transition-all"
                 onClick={() => sortCoins("hist")}
               >
                 H{" "}
@@ -225,7 +225,7 @@ const CoinSelector = ({
                 }`}
                 onClick={() => handleCoinSelect(coin)}
               >
-                <div className="w-[24px] text-center">
+                <div className="w-[28px] text-center">
                   <span
                     className={`text-[10px] cursor-pointer hover:scale-125 transition-transform duration-200 ${
                       coin.isFavorite
@@ -237,14 +237,14 @@ const CoinSelector = ({
                     ★
                   </span>
                 </div>
-                <div className="w-[70px] font-bold text-[10px] dark:text-white truncate">
+                <div className="w-[80px] font-bold text-[10px] dark:text-white truncate">
                   {coin.symbol}
                 </div>
-                <div className="w-[65px] text-right font-semibold text-[10px] dark:text-gray-200">
+                <div className="w-[80px] text-right font-semibold text-[10px] dark:text-gray-200">
                   {coin.price}
                 </div>
                 <div
-                  className={`w-[55px] text-right font-bold text-[10px] ${
+                  className={`w-[70px] text-right font-bold text-[10px] ml-4 ${
                     coin.changePercent >= 0
                       ? "text-emerald-500"
                       : "text-red-500"
@@ -252,7 +252,7 @@ const CoinSelector = ({
                 >
                   {coin.change}
                 </div>
-                <div className="w-[26px] text-center">
+                <div className="w-[30px] text-center">
                   {showLiveStatus && (
                     <span
                       className="inline-block rounded-full shadow-sm"
@@ -268,7 +268,7 @@ const CoinSelector = ({
                     ></span>
                   )}
                 </div>
-                <div className="w-[26px] text-center">
+                <div className="w-[30px] text-center">
                   {showHistStatus && (
                     <span
                       className="inline-block rounded-full shadow-sm"
