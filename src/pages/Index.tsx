@@ -4,6 +4,7 @@ import PriceDisplay from "../components/ui/price-display";
 import TimeButtons from "../components/ui/time-buttons";
 import ChartSection from "../components/ui/chart-section";
 import CoinSelector from "../components/ui/coin-selector";
+import ThemeProvider from "../components/ui/theme-provider";
 
 interface CoinData {
   id: string;
@@ -48,36 +49,38 @@ const Index = () => {
   };
 
   return (
-    <div className="bg-[#fbfcfd] text-[#222] font-sans min-h-screen px-6 py-5">
-      {/* Top Navigation */}
-      <TradingNav onTradingModeChange={setTradingMode} />
+    <ThemeProvider>
+      <div className="bg-[#fbfcfd] dark:bg-gray-900 text-[#222] dark:text-white font-sans min-h-screen px-6 py-5 transition-colors">
+        {/* Top Navigation */}
+        <TradingNav onTradingModeChange={setTradingMode} />
 
-      {/* Market & Price Section */}
-      <div className="flex gap-5 max-lg:flex-col max-lg:gap-0">
-        {/* Column 1: Coin Selector */}
-        <div className="flex flex-col w-[17%] max-lg:w-full max-lg:ml-0">
-          <CoinSelector
-            selectedCoin={selectedCoin}
-            onCoinSelect={handleCoinSelect}
-          />
+        {/* Market & Price Section */}
+        <div className="flex gap-5 max-lg:flex-col max-lg:gap-0">
+          {/* Column 1: Coin Selector */}
+          <div className="flex flex-col w-[17%] max-lg:w-full max-lg:ml-0">
+            <CoinSelector
+              selectedCoin={selectedCoin}
+              onCoinSelect={handleCoinSelect}
+            />
+          </div>
+
+          {/* Column 2: Price Display */}
+          <div className="flex flex-col w-[83%] ml-5 max-lg:w-full max-lg:ml-0">
+            <PriceDisplay
+              currentCoinData={currentCoinData}
+              marketData={marketData}
+              tradingMode={tradingMode}
+            />
+          </div>
         </div>
 
-        {/* Column 2: Price Display */}
-        <div className="flex flex-col w-[83%] ml-5 max-lg:w-full max-lg:ml-0">
-          <PriceDisplay
-            currentCoinData={currentCoinData}
-            marketData={marketData}
-            tradingMode={tradingMode}
-          />
-        </div>
+        {/* Time Buttons */}
+        <TimeButtons />
+
+        {/* Main Content: Chart + Orderbook */}
+        <ChartSection />
       </div>
-
-      {/* Time Buttons */}
-      <TimeButtons />
-
-      {/* Main Content: Chart + Orderbook */}
-      <ChartSection />
-    </div>
+    </ThemeProvider>
   );
 };
 
