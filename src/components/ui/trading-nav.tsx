@@ -89,17 +89,17 @@ const TradingNav = ({ onTradingModeChange }: TradingNavProps) => {
                 {marketOptions.map((option) => (
                   <div
                     key={option.name}
-                    className="flex items-center p-4 hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer border-b border-gray-100 dark:border-gray-600 last:border-b-0"
+                    className="flex items-center p-3 hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer border-b border-gray-100 dark:border-gray-600 last:border-b-0"
                     onClick={() => handleMarketOptionClick(option.name)}
                   >
-                    <div className="w-8 h-8 bg-black dark:bg-white text-white dark:text-black rounded flex items-center justify-center mr-3 text-sm">
+                    <div className="w-6 h-6 bg-black dark:bg-white text-white dark:text-black rounded flex items-center justify-center mr-2 text-xs">
                       {option.icon}
                     </div>
                     <div>
-                      <div className="font-semibold text-gray-900 dark:text-white">
+                      <div className="font-semibold text-gray-900 dark:text-white text-xs">
                         {option.name}
                       </div>
-                      <div className="text-sm text-gray-500 dark:text-gray-400">
+                      <div className="text-xs text-gray-500 dark:text-gray-400">
                         {option.description}
                       </div>
                     </div>
