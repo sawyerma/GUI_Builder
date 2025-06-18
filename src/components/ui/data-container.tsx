@@ -34,8 +34,26 @@ interface DataRowProps {
 }
 
 export const DataRow = ({ data, onClick, layout = "trades" }: DataRowProps) => {
-  // Detect if dark mode is active
-  const isDarkMode = document.documentElement.classList.contains("dark");
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
+  useEffect(() => {
+    // Check initial dark mode state
+    const checkDarkMode = () => {
+      setIsDarkMode(document.documentElement.classList.contains("dark"));
+    };
+
+    // Check on mount
+    checkDarkMode();
+
+    // Create observer to watch for class changes
+    const observer = new MutationObserver(checkDarkMode);
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["class"],
+    });
+
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <div
