@@ -59,7 +59,7 @@ const PriceDisplay = ({
     } else if (currentPriceNum < previousPriceNum) {
       setPriceColor("text-red-600"); // Preis gefallen = rot
     } else {
-      setPriceColor("text-[#222]"); // Kein Preischange = schwarz
+      setPriceColor("text-[#222] dark:text-white"); // Kein Preischange = schwarz/weiß
     }
 
     setPreviousPrice(currentCoinData.price);
@@ -84,13 +84,13 @@ const PriceDisplay = ({
         >
           {currentCoinData.price}
         </span>
-        <span className="text-sm text-[#444] tracking-wider mt-0">
+        <span className="text-sm text-[#444] dark:text-gray-400 tracking-wider mt-0">
           {tradingMode}
         </span>
       </div>
 
       {/* Market Data - All in one line */}
-      <div className="flex items-center gap-x-6 text-[0.8rem] mt-2 font-sans whitespace-nowrap">
+      <div className="flex items-center gap-x-6 text-[0.8rem] mt-2 font-sans whitespace-nowrap dark:text-gray-300">
         <span>
           Δ 24h:{" "}
           <span className={`font-bold ${getDelta24hColor()}`}>

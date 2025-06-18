@@ -148,7 +148,7 @@ const CoinSelector = ({
     <div className="relative">
       {/* Dropdown Button */}
       <button
-        className="border-2 border-[#444] text-[#222] rounded px-0 py-1.5 font-medium bg-transparent my-auto w-full"
+        className="border-2 border-[#444] dark:border-[#666] text-[#222] dark:text-white rounded px-0 py-1.5 font-medium bg-transparent my-auto w-full"
         onClick={() => setIsOpen(!isOpen)}
       >
         {selectedCoin}&nbsp;&nbsp;&nbsp;&nbsp;
@@ -158,9 +158,9 @@ const CoinSelector = ({
       {/* Dropdown Menu */}
       {isOpen && (
         <div className="absolute top-full left-0 mt-2 z-50 max-w-[658px]">
-          <div className="min-w-[441px] rounded-[13px] shadow-[0_3px_22px_0_rgba(40,60,120,0.13)] border-[1px] border-[#eee] bg-white overflow-hidden">
+          <div className="min-w-[441px] rounded-[13px] shadow-[0_3px_22px_0_rgba(40,60,120,0.13)] border-[1px] border-[#eee] dark:border-[#666] bg-white dark:bg-gray-800 overflow-hidden">
             {/* Header */}
-            <div className="flex items-center px-[21px] bg-[#f7fafd] font-bold h-10 text-[#65717c] tracking-[0.03em] border-b border-[#f3f3f3] font-sans text-[11px]">
+            <div className="flex items-center px-[21px] bg-[#f7fafd] dark:bg-gray-700 font-bold h-10 text-[#65717c] dark:text-gray-300 tracking-[0.03em] border-b border-[#f3f3f3] dark:border-gray-600 font-sans text-[11px]">
               <div
                 className="w-[48px] text-center text-[#ffd600] text-[11px] cursor-pointer hover:bg-[#f0f8ff] transition-colors"
                 onClick={() => sortCoins("favorite")}
@@ -214,10 +214,10 @@ const CoinSelector = ({
             {coins.map((coin) => (
               <div
                 key={coin.id}
-                className={`flex items-center px-[21px] h-[43px] font-sans text-[11px] cursor-pointer transition-all duration-[140ms] border-b border-[#f3f3f3] last:border-b-0 ${
+                className={`flex items-center px-[21px] h-[43px] font-sans text-[11px] cursor-pointer transition-all duration-[140ms] border-b border-[#f3f3f3] dark:border-gray-600 last:border-b-0 ${
                   coin.symbol === selectedCoin
-                    ? "bg-[#eaffee]"
-                    : "hover:bg-[#f5fafe]"
+                    ? "bg-[#eaffee] dark:bg-gray-600"
+                    : "hover:bg-[#f5fafe] dark:hover:bg-gray-700"
                 }`}
                 onClick={() => handleCoinSelect(coin)}
               >
@@ -231,7 +231,7 @@ const CoinSelector = ({
                     ★
                   </span>
                 </div>
-                <div className="w-[110px] font-bold text-[11px]">
+                <div className="w-[110px] font-bold text-[11px] dark:text-white">
                   {coin.symbol}
                 </div>
                 <div className="w-[105px] text-right font-medium font-mono text-[11px]">

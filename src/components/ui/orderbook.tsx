@@ -343,9 +343,9 @@ const Orderbook = ({
   const maxTotal = Math.max(...ordersToShow.map((order) => order.total));
 
   return (
-    <div className="bg-white rounded-xl shadow h-full flex flex-col">
+    <div className="bg-white dark:bg-gray-800 rounded-xl shadow h-full flex flex-col">
       {/* Header with Tabs */}
-      <div className="border-b border-gray-200 px-4 pt-4">
+      <div className="border-b border-gray-200 dark:border-gray-600 px-4 pt-4">
         <div className="flex items-center justify-between mb-3">
           <div className="flex relative">
             <button
@@ -357,8 +357,8 @@ const Orderbook = ({
               }}
               className={`px-4 py-2 text-sm font-medium transition-colors relative cursor-pointer ${
                 activeTab === "orderbook"
-                  ? "text-black"
-                  : "text-gray-500 hover:text-gray-700"
+                  ? "text-black dark:text-white"
+                  : "text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200"
               }`}
             >
               Orderbuch
@@ -375,8 +375,8 @@ const Orderbook = ({
               }}
               className={`px-4 py-2 text-sm font-medium transition-colors ml-6 relative cursor-pointer ${
                 activeTab === "trades"
-                  ? "text-black"
-                  : "text-gray-500 hover:text-gray-700"
+                  ? "text-black dark:text-white"
+                  : "text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200"
               }`}
             >
               Markt-Trades
@@ -389,7 +389,7 @@ const Orderbook = ({
 
         {/* Column Headers */}
         {activeTab === "orderbook" && (
-          <div className="grid grid-cols-3 text-xs text-gray-500 pb-2">
+          <div className="grid grid-cols-3 text-xs text-gray-500 dark:text-gray-400 pb-2">
             <div className="text-left">Preis (USDT)</div>
             <div className="text-center">Betrag (BTC)</div>
             <div className="text-right">Umsatz</div>
@@ -397,7 +397,7 @@ const Orderbook = ({
         )}
 
         {activeTab === "trades" && (
-          <div className="grid grid-cols-3 text-xs text-gray-500 pb-2">
+          <div className="grid grid-cols-3 text-xs text-gray-500 dark:text-gray-400 pb-2">
             <div className="text-left">Preis (USDT)</div>
             <div className="text-center">Betrag (BTC)</div>
             <div className="text-right">Zeit</div>
@@ -422,7 +422,7 @@ const Orderbook = ({
                   ></div>
 
                   {/* Order Row */}
-                  <div className="relative grid grid-cols-3 text-xs py-1 px-4 hover:bg-gray-50">
+                  <div className="relative grid grid-cols-3 text-xs py-1 px-4 hover:bg-gray-50 dark:hover:bg-gray-700">
                     <div className="text-red-500 font-mono">
                       {formatNumber(order.price, 2)}
                     </div>
@@ -438,12 +438,12 @@ const Orderbook = ({
             </div>
 
             {/* Current Price */}
-            <div className="border-y border-gray-200 bg-gray-50 py-2 px-4">
+            <div className="border-y border-gray-200 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 py-2 px-4">
               <div className="flex items-center justify-between">
                 <div className="text-lg font-bold text-red-500">
                   {formatNumber(currentPrice, 2)} ↓
                 </div>
-                <div className="text-xs text-gray-500">
+                <div className="text-xs text-gray-500 dark:text-gray-400">
                   ≈ ${formatNumber(currentPrice - 10, 2)}
                 </div>
               </div>
@@ -462,7 +462,7 @@ const Orderbook = ({
                   ></div>
 
                   {/* Order Row */}
-                  <div className="relative grid grid-cols-3 text-xs py-1 px-4 hover:bg-gray-50">
+                  <div className="relative grid grid-cols-3 text-xs py-1 px-4 hover:bg-gray-50 dark:hover:bg-gray-700">
                     <div className="text-green-500 font-mono">
                       {formatNumber(order.price, 2)}
                     </div>

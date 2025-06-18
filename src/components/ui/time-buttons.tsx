@@ -59,7 +59,9 @@ const TimeButtons = () => {
 
   return (
     <div className="flex items-center gap-2 my-3 text-sm">
-      <label className="font-medium text-[#444] mr-2">Zeit</label>
+      <label className="font-medium text-[#444] dark:text-gray-300 mr-2">
+        Zeit
+      </label>
 
       {/* Display Buttons */}
       {displayIntervals.map((interval) => (
@@ -68,7 +70,7 @@ const TimeButtons = () => {
           className={`px-2 py-0.5 rounded border text-[12.8px] ${
             activeTime === interval
               ? "bg-[#1a48d8] text-white border-[#153289]"
-              : "bg-gray-100 text-[#222] border-gray-300"
+              : "bg-gray-100 dark:bg-gray-700 text-[#222] dark:text-white border-gray-300 dark:border-gray-600"
           }`}
           onClick={() => setActiveTime(interval)}
         >
@@ -79,7 +81,7 @@ const TimeButtons = () => {
       {/* Dropdown Button */}
       <div className="relative">
         <button
-          className="px-2 py-0.5 rounded border bg-gray-100 text-[#222] border-gray-300 flex items-center gap-1 text-[12.8px]"
+          className="px-2 py-0.5 rounded border bg-gray-100 dark:bg-gray-700 text-[#222] dark:text-white border-gray-300 dark:border-gray-600 flex items-center gap-1 text-[12.8px]"
           onClick={() => setIsDropdownOpen(!isDropdownOpen)}
         >
           ▼
@@ -87,10 +89,10 @@ const TimeButtons = () => {
 
         {/* Dropdown Menu */}
         {isDropdownOpen && (
-          <div className="absolute top-full right-0 mt-1 z-50 w-80 bg-white rounded-lg shadow-xl border">
+          <div className="absolute top-full right-0 mt-1 z-50 w-80 bg-white dark:bg-gray-800 rounded-lg shadow-xl border dark:border-gray-600">
             <div className="p-4">
               <div className="flex items-center justify-between mb-4">
-                <h3 className="font-semibold text-gray-900">
+                <h3 className="font-semibold text-gray-900 dark:text-white">
                   Intervall auswählen
                 </h3>
                 <button
@@ -108,8 +110,8 @@ const TimeButtons = () => {
                     key={interval.value}
                     className={`h-10 rounded text-sm font-medium transition-colors relative flex items-center justify-center cursor-pointer ${
                       activeTime === interval.value && !isEditMode
-                        ? "bg-blue-100 text-blue-600 border border-blue-200"
-                        : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                        ? "bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-300 border border-blue-200 dark:border-blue-700"
+                        : "bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-600"
                     }`}
                     onClick={() =>
                       isEditMode
