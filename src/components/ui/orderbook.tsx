@@ -36,6 +36,7 @@ const Orderbook = ({
   );
 
   const handleTabChange = (tab: "orderbook" | "trades") => {
+    console.log("Tab change requested:", tab); // Debug log
     setActiveTab(tab);
     if (onTabChange) {
       onTabChange(tab);
