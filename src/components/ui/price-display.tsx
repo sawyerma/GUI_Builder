@@ -45,7 +45,7 @@ const PriceDisplay = ({
     <div className="flex items-start gap-8 mb-1">
       {/* Price + Type */}
       <div className="flex flex-col items-start min-w-[170px]">
-        <span className="text-[1.65rem] font-bold text-[#e4261c] leading-tight tracking-wider">
+        <span className="text-[1.65rem] font-bold text-[#222] leading-tight tracking-wider">
           {currentCoinData.price}
         </span>
         <span className="text-sm text-[#444] tracking-wider mt-0">

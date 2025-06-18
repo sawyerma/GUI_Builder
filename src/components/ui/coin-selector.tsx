@@ -148,7 +148,7 @@ const CoinSelector = ({
     <div className="relative">
       {/* Dropdown Button */}
       <button
-        className="border-2 border-[#e4261c] text-[#e4261c] rounded px-0 py-1.5 font-medium bg-transparent my-auto w-full"
+        className="border-2 border-[#444] text-[#222] rounded px-0 py-1.5 font-medium bg-transparent my-auto w-full"
         onClick={() => setIsOpen(!isOpen)}
       >
         {selectedCoin}&nbsp;&nbsp;&nbsp;&nbsp;
