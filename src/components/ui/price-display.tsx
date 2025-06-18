@@ -41,11 +41,45 @@ const PriceDisplay = ({
 
   const data = marketData || defaultMarketData;
 
+  // State für Preisvergleich
+  const [previousPrice, setPreviousPrice] = useState<string>(
+    currentCoinData.price,
+  );
+  const [priceColor, setPriceColor] = useState<string>("text-[#222]");
+
+  // Preis-Änderungen überwachen
+  useEffect(() => {
+    const currentPriceNum = parseFloat(currentCoinData.price.replace(/,/g, ""));
+    const previousPriceNum = parseFloat(previousPrice.replace(/,/g, ""));
+
+    if (currentPriceNum > previousPriceNum) {
+      setPriceColor("text-green-600"); // Preis gestiegen = grün
+    } else if (currentPriceNum < previousPriceNum) {
+      setPriceColor("text-red-600"); // Preis gefallen = rot
+    } else {
+      setPriceColor("text-[#222]"); // Kein Preischange = schwarz
+    }
+
+    setPreviousPrice(currentCoinData.price);
+  }, [currentCoinData.price]);
+
+  // Δ 24h Farbe basierend auf Vorzeichen
+  const getDelta24hColor = () => {
+    if (data.change24h.startsWith("+")) {
+      return "text-green-600"; // Positiv = grün
+    } else if (data.change24h.startsWith("-")) {
+      return "text-red-600"; // Negativ = rot
+    }
+    return "text-[#222]"; // Neutral = schwarz
+  };
+
   return (
     <div className="flex items-start gap-8 mb-1">
       {/* Price + Type */}
       <div className="flex flex-col items-start min-w-[170px]">
-        <span className="text-[1.65rem] font-bold text-[#222] leading-tight tracking-wider">
+        <span
+          className={`text-[1.65rem] font-bold ${priceColor} leading-tight tracking-wider`}
+        >
           {currentCoinData.price}
         </span>
         <span className="text-sm text-[#444] tracking-wider mt-0">
@@ -57,9 +91,7 @@ const PriceDisplay = ({
       <div className="flex items-center gap-x-6 text-[0.8rem] mt-2 font-sans whitespace-nowrap">
         <span>
           Δ 24h:{" "}
-          <span
-            className={`font-bold ${currentCoinData.changePercent >= 0 ? "text-green-600" : "text-red-600"}`}
-          >
+          <span className={`font-bold ${getDelta24hColor()}`}>
             {data.change24h}
           </span>
         </span>
