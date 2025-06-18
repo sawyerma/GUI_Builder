@@ -40,6 +40,9 @@ const Index = () => {
     category: "Public Chain", // Variable 6
   });
 
+  // Trading Mode State (SPOT oder Futures-Option)
+  const [tradingMode, setTradingMode] = useState("SPOT");
+
   const handleCoinSelect = (coin: CoinData) => {
     setSelectedCoin(coin.symbol);
     setCurrentCoinData(coin);
@@ -48,7 +51,7 @@ const Index = () => {
   return (
     <div className="bg-[#fbfcfd] text-[#222] font-sans min-h-screen px-6 py-5">
       {/* Top Navigation */}
-      <TradingNav />
+      <TradingNav onTradingModeChange={setTradingMode} />
 
       {/* Market & Price Section */}
       <div className="flex gap-5 max-lg:flex-col max-lg:gap-0">
@@ -65,6 +68,7 @@ const Index = () => {
           <PriceDisplay
             currentCoinData={currentCoinData}
             marketData={marketData}
+            tradingMode={tradingMode}
           />
         </div>
       </div>

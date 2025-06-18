@@ -21,9 +21,14 @@ interface MarketData {
 interface PriceDisplayProps {
   currentCoinData: CoinData;
   marketData?: MarketData; // Optional - falls nicht übergeben werden Dummy-Daten verwendet
+  tradingMode?: string; // "Spot" oder gewählte Futures-Option
 }
 
-const PriceDisplay = ({ currentCoinData, marketData }: PriceDisplayProps) => {
+const PriceDisplay = ({
+  currentCoinData,
+  marketData,
+  tradingMode = "SPOT",
+}: PriceDisplayProps) => {
   // Fallback zu Dummy-Daten wenn keine MarketData übergeben werden
   const defaultMarketData: MarketData = {
     change24h: currentCoinData.change,
@@ -43,7 +48,9 @@ const PriceDisplay = ({ currentCoinData, marketData }: PriceDisplayProps) => {
         <span className="text-[1.65rem] font-bold text-[#e4261c] leading-tight tracking-wider">
           {currentCoinData.price}
         </span>
-        <span className="text-sm text-[#444] tracking-wider mt-0">SPOT</span>
+        <span className="text-sm text-[#444] tracking-wider mt-0">
+          {tradingMode}
+        </span>
       </div>
 
       {/* Market Data - All in one line */}
