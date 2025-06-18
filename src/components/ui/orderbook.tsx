@@ -385,15 +385,6 @@ const Orderbook = ({
               )}
             </button>
           </div>
-
-          {/* Settings Icon */}
-          <div className="flex items-center gap-2 text-gray-400">
-            <div className="w-4 h-4 flex flex-col justify-center gap-0.5">
-              <div className="h-0.5 bg-current rounded"></div>
-              <div className="h-0.5 bg-current rounded"></div>
-              <div className="h-0.5 bg-current rounded"></div>
-            </div>
-          </div>
         </div>
 
         {/* Column Headers */}
@@ -410,30 +401,6 @@ const Orderbook = ({
             <div className="text-left">Preis (USDT)</div>
             <div className="text-center">Betrag (BTC)</div>
             <div className="text-right">Zeit</div>
-          </div>
-        )}
-
-        {/* Precision Controls for Orderbook */}
-        {activeTab === "orderbook" && (
-          <div className="flex items-center gap-1 pb-3">
-            <div className="flex gap-1">
-              <button className="px-2 py-1 text-xs bg-gray-100 text-gray-600 rounded">
-                📊
-              </button>
-              <button className="px-2 py-1 text-xs bg-gray-100 text-gray-600 rounded">
-                📈
-              </button>
-              <button className="px-2 py-1 text-xs bg-gray-100 text-gray-600 rounded">
-                📉
-              </button>
-            </div>
-            <div className="ml-auto">
-              <select className="text-xs bg-gray-100 border-none rounded px-2 py-1">
-                <option>0.01</option>
-                <option>0.1</option>
-                <option>1</option>
-              </select>
-            </div>
           </div>
         )}
       </div>
