@@ -253,12 +253,14 @@ const CoinSelector = ({
                 <div className="w-[49px] text-center">
                   {showLiveStatus && (
                     <span
-                      className="inline-block w-3 h-3 rounded-full"
+                      className="inline-block rounded-full"
                       style={{
+                        width: "9.6px",
+                        height: "9.6px",
                         backgroundColor:
                           coin.liveStatus === "green"
-                            ? "rgba(65, 207, 88, 0.9)"
-                            : "rgba(239, 68, 68, 0.9)",
+                            ? "rgba(65, 207, 88, 0.8)"
+                            : "rgba(239, 68, 68, 0.8)",
                         border: "none",
                       }}
                     ></span>
@@ -267,12 +269,14 @@ const CoinSelector = ({
                 <div className="w-[49px] text-center">
                   {showHistStatus && (
                     <span
-                      className="inline-block w-3 h-3 rounded-full"
+                      className="inline-block rounded-full"
                       style={{
+                        width: "9.6px",
+                        height: "9.6px",
                         backgroundColor:
                           coin.histStatus === "green"
-                            ? "rgba(65, 207, 88, 0.9)"
-                            : "rgba(239, 68, 68, 0.9)",
+                            ? "rgba(65, 207, 88, 0.8)"
+                            : "rgba(239, 68, 68, 0.8)",
                         border: "none",
                       }}
                     ></span>
