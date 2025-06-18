@@ -85,12 +85,14 @@ const CoinSelector = ({
           <div className="min-w-[441px] rounded-[13px] shadow-[0_3px_22px_0_rgba(40,60,120,0.13)] border-[1px] border-[#eee] bg-white overflow-hidden">
             {/* Header */}
             <div className="flex items-center px-[21px] bg-[#f7fafd] font-bold h-10 text-[#65717c] tracking-[0.03em] border-b border-[#f3f3f3] text-[0.69rem]">
-              <div className="w-[48px] text-center"></div>
-              <div className="w-[133px] font-bold text-[0.58rem]">Coin</div>
-              <div className="w-[125px] text-right text-[0.58rem]">
+              <div className="w-[48px] text-center text-[#ffd600] text-[7px] leading-[11px]">
+                ★
+              </div>
+              <div className="w-[120px] font-bold text-[0.58rem]">Coin</div>
+              <div className="w-[115px] text-right text-[0.58rem]">
                 Letzter Preis
               </div>
-              <div className="w-[112px] text-right text-[0.58rem]">Δ 24h</div>
+              <div className="w-[125px] text-right text-[0.58rem]">Δ 24h</div>
               <div className="w-[49px] text-center text-[0.57rem]">Live</div>
               <div className="w-[49px] text-center text-[0.57rem]">Hist</div>
             </div>
@@ -108,19 +110,19 @@ const CoinSelector = ({
               >
                 <div className="w-[48px] text-center">
                   <span
-                    className={`text-[0.58em] ${
+                    className={`text-[0.59em] ${
                       coin.isFavorite ? "text-[#ffd600]" : "text-[#e7e7e7]"
                     }`}
                   >
                     ★
                   </span>
                 </div>
-                <div className="w-[133px] font-bold">{coin.symbol}</div>
-                <div className="w-[125px] text-right font-medium font-mono">
+                <div className="w-[120px] font-bold">{coin.symbol}</div>
+                <div className="w-[115px] text-right font-medium font-mono">
                   {coin.price}
                 </div>
                 <div
-                  className={`w-[112px] text-right font-bold ${
+                  className={`w-[125px] text-right font-bold ${
                     coin.changePercent >= 0
                       ? "text-[#15b446]"
                       : "text-[#d53939]"
