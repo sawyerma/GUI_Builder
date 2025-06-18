@@ -5,7 +5,14 @@ interface DataContainerProps {
 
 const DataContainer = ({ children, className = "" }: DataContainerProps) => {
   return (
-    <div className={`h-full overflow-y-auto ${className}`}>{children}</div>
+    <div
+      className={`h-full overflow-y-auto ${className}`}
+      style={{
+        fontFamily: "'Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'",
+      }}
+    >
+      {children}
+    </div>
   );
 };
 
@@ -28,7 +35,13 @@ interface DataRowProps {
 
 export const DataRow = ({ data, onClick, layout = "trades" }: DataRowProps) => {
   return (
-    <div className="relative cursor-pointer hover:bg-gray-50" onClick={onClick}>
+    <div
+      className="relative cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700"
+      onClick={onClick}
+      style={{
+        fontFamily: "'Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'",
+      }}
+    >
       {/* Volume background for orderbook */}
       {layout === "orderbook" && data.volumeWidth && (
         <div
@@ -39,7 +52,9 @@ export const DataRow = ({ data, onClick, layout = "trades" }: DataRowProps) => {
 
       {/* Data Row */}
       <div className="relative grid grid-cols-3 text-xs py-1 px-4">
-        <div className={`font-medium ${data.col1Color || "text-gray-600"}`}>
+        <div
+          className={`font-medium ${data.col1Color || "text-gray-600 dark:text-white"}`}
+        >
           {layout === "trades" && data.arrow && (
             <span className="flex items-center">
               <span>{data.col1}</span>
@@ -51,12 +66,12 @@ export const DataRow = ({ data, onClick, layout = "trades" }: DataRowProps) => {
           {(layout === "orderbook" || !data.arrow) && <span>{data.col1}</span>}
         </div>
         <div
-          className={`text-center font-medium ${data.col2Color || "text-gray-600"}`}
+          className={`text-center font-medium ${data.col2Color || "text-gray-600 dark:text-white"}`}
         >
           {data.col2}
         </div>
         <div
-          className={`text-right ${data.col3Color || "text-gray-600"} ${layout === "orderbook" ? "font-medium" : "text-xs font-medium"}`}
+          className={`text-right ${data.col3Color || "text-gray-600 dark:text-white"} ${layout === "orderbook" ? "font-medium" : "text-xs font-medium"}`}
         >
           {data.col3}
         </div>
