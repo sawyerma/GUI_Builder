@@ -73,20 +73,213 @@ const Orderbook = ({
     {
       id: "1",
       price: 104534.14,
-      amount: 0.025,
-      time: "23:53:42",
+      amount: 0.000396,
+      time: "23:53:59",
       side: "sell",
     },
-    { id: "2", price: 104531.55, amount: 0.015, time: "23:53:41", side: "buy" },
-    { id: "3", price: 104529.06, amount: 0.05, time: "23:53:40", side: "sell" },
+    {
+      id: "2",
+      price: 104534.14,
+      amount: 0.000396,
+      time: "23:53:59",
+      side: "sell",
+    },
+    {
+      id: "3",
+      price: 104534.14,
+      amount: 0.000396,
+      time: "23:53:58",
+      side: "sell",
+    },
     {
       id: "4",
-      price: 104524.86,
-      amount: 0.0085,
-      time: "23:53:39",
+      price: 104534.15,
+      amount: 0.000173,
+      time: "23:53:58",
       side: "buy",
     },
-    { id: "5", price: 104520.7, amount: 0.033, time: "23:53:38", side: "sell" },
+    {
+      id: "5",
+      price: 104534.14,
+      amount: 0.000396,
+      time: "23:53:58",
+      side: "sell",
+    },
+    {
+      id: "6",
+      price: 104534.15,
+      amount: 0.000116,
+      time: "23:53:58",
+      side: "buy",
+    },
+    {
+      id: "7",
+      price: 104534.14,
+      amount: 0.000396,
+      time: "23:53:58",
+      side: "sell",
+    },
+    {
+      id: "8",
+      price: 104534.14,
+      amount: 0.000145,
+      time: "23:53:58",
+      side: "sell",
+    },
+    {
+      id: "9",
+      price: 104534.15,
+      amount: 0.000098,
+      time: "23:53:57",
+      side: "buy",
+    },
+    {
+      id: "10",
+      price: 104534.14,
+      amount: 0.000396,
+      time: "23:53:57",
+      side: "sell",
+    },
+    {
+      id: "11",
+      price: 104534.14,
+      amount: 0.000173,
+      time: "23:53:57",
+      side: "sell",
+    },
+    {
+      id: "12",
+      price: 104534.15,
+      amount: 0.000135,
+      time: "23:53:57",
+      side: "buy",
+    },
+    {
+      id: "13",
+      price: 104534.14,
+      amount: 0.000396,
+      time: "23:53:57",
+      side: "sell",
+    },
+    {
+      id: "14",
+      price: 104534.15,
+      amount: 0.000173,
+      time: "23:53:57",
+      side: "buy",
+    },
+    {
+      id: "15",
+      price: 104534.14,
+      amount: 0.000396,
+      time: "23:53:57",
+      side: "sell",
+    },
+    {
+      id: "16",
+      price: 104534.15,
+      amount: 0.000135,
+      time: "23:53:57",
+      side: "buy",
+    },
+    {
+      id: "17",
+      price: 104534.14,
+      amount: 0.000396,
+      time: "23:53:56",
+      side: "sell",
+    },
+    {
+      id: "18",
+      price: 104534.14,
+      amount: 0.000106,
+      time: "23:53:56",
+      side: "sell",
+    },
+    {
+      id: "19",
+      price: 104534.14,
+      amount: 0.000396,
+      time: "23:53:56",
+      side: "sell",
+    },
+    {
+      id: "20",
+      price: 104534.15,
+      amount: 0.000106,
+      time: "23:53:56",
+      side: "buy",
+    },
+    {
+      id: "21",
+      price: 104534.14,
+      amount: 0.000396,
+      time: "23:53:56",
+      side: "sell",
+    },
+    {
+      id: "22",
+      price: 104534.15,
+      amount: 0.000106,
+      time: "23:53:56",
+      side: "buy",
+    },
+    {
+      id: "23",
+      price: 104534.14,
+      amount: 0.000396,
+      time: "23:53:55",
+      side: "sell",
+    },
+    {
+      id: "24",
+      price: 104534.15,
+      amount: 0.000116,
+      time: "23:53:55",
+      side: "buy",
+    },
+    {
+      id: "25",
+      price: 104534.14,
+      amount: 0.000396,
+      time: "23:53:55",
+      side: "sell",
+    },
+    {
+      id: "26",
+      price: 104534.14,
+      amount: 0.000135,
+      time: "23:53:55",
+      side: "sell",
+    },
+    {
+      id: "27",
+      price: 104534.14,
+      amount: 0.000396,
+      time: "23:53:55",
+      side: "sell",
+    },
+    {
+      id: "28",
+      price: 104534.15,
+      amount: 0.000135,
+      time: "23:53:55",
+      side: "buy",
+    },
+    {
+      id: "29",
+      price: 104534.14,
+      amount: 0.000396,
+      time: "23:53:54",
+      side: "sell",
+    },
+    {
+      id: "30",
+      price: 104534.14,
+      amount: 0.000164,
+      time: "23:53:54",
+      side: "sell",
+    },
   ];
 
   const ordersToShow = orders.length > 0 ? orders : dummyOrders;
@@ -162,7 +355,7 @@ const Orderbook = ({
         {activeTab === "trades" && (
           <div className="grid grid-cols-3 text-xs text-gray-500 pb-2">
             <div className="text-left">Preis (USDT)</div>
-            <div className="text-center">Menge (BTC)</div>
+            <div className="text-center">Betrag (BTC)</div>
             <div className="text-right">Zeit</div>
           </div>
         )}
@@ -270,12 +463,19 @@ const Orderbook = ({
             {tradesToShow.map((trade) => (
               <div
                 key={trade.id}
-                className="grid grid-cols-3 text-xs py-2 px-4 hover:bg-gray-50 border-b border-gray-100"
+                className="grid grid-cols-3 text-xs py-1 px-4 hover:bg-gray-50"
               >
-                <div
-                  className={`font-mono ${trade.side === "buy" ? "text-green-500" : "text-red-500"}`}
-                >
-                  {formatNumber(trade.price, 2)}
+                <div className="flex items-center">
+                  <span
+                    className={`font-mono ${trade.side === "buy" ? "text-green-500" : "text-red-500"}`}
+                  >
+                    {formatNumber(trade.price, 2)}
+                  </span>
+                  <span
+                    className={`ml-1 text-xs ${trade.side === "buy" ? "text-green-500" : "text-red-500"}`}
+                  >
+                    {trade.side === "buy" ? "↑" : "↓"}
+                  </span>
                 </div>
                 <div className="text-center text-gray-600 font-mono">
                   {trade.amount.toFixed(6)}
