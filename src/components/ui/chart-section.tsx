@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import {
   ResizableHandle,
   ResizablePanel,
@@ -156,7 +156,7 @@ const ChartSection = () => {
   };
 
   // Global event listeners für Drag
-  React.useEffect(() => {
+  useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
       if (dragState.isDragging) {
         e.preventDefault();
