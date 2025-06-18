@@ -161,18 +161,18 @@ const CoinSelector = ({
 
       {/* Dropdown Menu */}
       {isOpen && (
-        <div className="absolute top-full left-0 mt-2 z-50 max-w-[658px]">
-          <div className="min-w-[441px] rounded-[13px] shadow-[0_3px_22px_0_rgba(40,60,120,0.13)] border-[1px] border-[#eee] dark:border-[#666] bg-white dark:bg-gray-800 overflow-hidden">
+        <div className="absolute top-full left-0 mt-2 z-50 max-w-[480px]">
+          <div className="min-w-[320px] rounded-xl shadow-2xl bg-white dark:bg-gray-800 overflow-hidden backdrop-blur-sm border border-gray-200 dark:border-gray-700">
             {/* Header */}
-            <div className="flex items-center px-[21px] bg-[#f7fafd] dark:bg-gray-700 font-bold h-10 text-[#65717c] dark:text-gray-300 tracking-[0.03em] border-b border-[#f3f3f3] dark:border-gray-600 font-sans text-[11px]">
+            <div className="flex items-center px-4 bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-gray-700 dark:to-gray-800 font-bold h-9 text-gray-600 dark:text-gray-300 tracking-wide font-sans text-[10px] uppercase">
               <div
-                className="w-[48px] text-center text-[#ffd600] text-[11px] cursor-pointer hover:bg-[#f0f8ff] transition-colors"
+                className="w-[24px] text-center text-yellow-500 text-[10px] cursor-pointer hover:bg-white/50 dark:hover:bg-gray-600/50 rounded transition-all"
                 onClick={() => sortCoins("favorite")}
               >
                 ★
               </div>
               <div
-                className="w-[110px] font-bold text-[11px] cursor-pointer hover:bg-[#f0f8ff] transition-colors"
+                className="w-[70px] font-bold text-[10px] cursor-pointer hover:bg-white/50 dark:hover:bg-gray-600/50 rounded px-1 transition-all"
                 onClick={() => sortCoins("coin")}
               >
                 Coin{" "}
@@ -184,32 +184,32 @@ const CoinSelector = ({
                       : "~")}
               </div>
               <div
-                className="w-[105px] text-right text-[11px] cursor-pointer hover:bg-[#f0f8ff] transition-colors"
+                className="w-[65px] text-right text-[10px] cursor-pointer hover:bg-white/50 dark:hover:bg-gray-600/50 rounded px-1 transition-all"
                 onClick={() => sortCoins("price")}
               >
                 Price{" "}
                 {sortField === "price" && (sortDirection === "asc" ? "↑" : "↓")}
               </div>
               <div
-                className="w-[135px] text-right text-[11px] cursor-pointer hover:bg-[#f0f8ff] transition-colors"
+                className="w-[55px] text-right text-[10px] cursor-pointer hover:bg-white/50 dark:hover:bg-gray-600/50 rounded px-1 transition-all"
                 onClick={() => sortCoins("change")}
               >
-                Δ 24h{" "}
+                24h{" "}
                 {sortField === "change" &&
                   (sortDirection === "asc" ? "↑" : "↓")}
               </div>
               <div
-                className="w-[49px] text-center text-[11px] cursor-pointer hover:bg-[#f0f8ff] transition-colors"
+                className="w-[26px] text-center text-[10px] cursor-pointer hover:bg-white/50 dark:hover:bg-gray-600/50 rounded px-1 transition-all"
                 onClick={() => sortCoins("live")}
               >
-                Live{" "}
+                L{" "}
                 {sortField === "live" && (sortDirection === "asc" ? "↑" : "↓")}
               </div>
               <div
-                className="w-[49px] text-center text-[11px] cursor-pointer hover:bg-[#f0f8ff] transition-colors"
+                className="w-[26px] text-center text-[10px] cursor-pointer hover:bg-white/50 dark:hover:bg-gray-600/50 rounded px-1 transition-all"
                 onClick={() => sortCoins("hist")}
               >
-                Hist{" "}
+                H{" "}
                 {sortField === "hist" && (sortDirection === "asc" ? "↑" : "↓")}
               </div>
             </div>
@@ -218,65 +218,67 @@ const CoinSelector = ({
             {coins.map((coin) => (
               <div
                 key={coin.id}
-                className={`flex items-center px-[21px] h-[43px] font-sans text-[11px] cursor-pointer transition-all duration-[140ms] border-b border-[#f3f3f3] dark:border-gray-600 last:border-b-0 ${
+                className={`flex items-center px-4 h-[36px] font-sans text-[10px] cursor-pointer transition-all duration-200 border-b border-gray-100 dark:border-gray-700 last:border-b-0 ${
                   coin.symbol === selectedCoin
-                    ? "bg-[#eaffee] dark:bg-gray-600"
-                    : "hover:bg-[#f5fafe] dark:hover:bg-gray-700"
+                    ? "bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/30 dark:to-indigo-900/30 shadow-sm"
+                    : "hover:bg-gradient-to-r hover:from-gray-50 hover:to-blue-50 dark:hover:from-gray-700 dark:hover:to-gray-600"
                 }`}
                 onClick={() => handleCoinSelect(coin)}
               >
-                <div className="w-[48px] text-center">
+                <div className="w-[24px] text-center">
                   <span
-                    className={`text-[11px] cursor-pointer hover:scale-110 transition-transform ${
-                      coin.isFavorite ? "text-[#ffd600]" : "text-[#e7e7e7]"
+                    className={`text-[10px] cursor-pointer hover:scale-125 transition-transform duration-200 ${
+                      coin.isFavorite
+                        ? "text-yellow-500"
+                        : "text-gray-300 dark:text-gray-600"
                     }`}
                     onClick={(e) => toggleFavorite(coin.id, e)}
                   >
                     ★
                   </span>
                 </div>
-                <div className="w-[110px] font-bold text-[11px] dark:text-white">
+                <div className="w-[70px] font-bold text-[10px] dark:text-white truncate">
                   {coin.symbol}
                 </div>
-                <div className="w-[105px] text-right font-medium font-mono text-[11px]">
+                <div className="w-[65px] text-right font-semibold text-[10px] dark:text-gray-200">
                   {coin.price}
                 </div>
                 <div
-                  className={`w-[135px] text-right font-bold text-[11px] ${
+                  className={`w-[55px] text-right font-bold text-[10px] ${
                     coin.changePercent >= 0
-                      ? "text-[#15b446]"
-                      : "text-[#d53939]"
+                      ? "text-emerald-500"
+                      : "text-red-500"
                   }`}
                 >
                   {coin.change}
                 </div>
-                <div className="w-[49px] text-center">
+                <div className="w-[26px] text-center">
                   {showLiveStatus && (
                     <span
-                      className="inline-block rounded-full"
+                      className="inline-block rounded-full shadow-sm"
                       style={{
-                        width: "9.6px",
-                        height: "9.6px",
+                        width: "8px",
+                        height: "8px",
                         backgroundColor:
                           coin.liveStatus === "green"
-                            ? "rgba(65, 207, 88, 0.8)"
-                            : "rgba(239, 68, 68, 0.8)",
+                            ? "rgba(16, 185, 129, 0.9)"
+                            : "rgba(239, 68, 68, 0.9)",
                         border: "none",
                       }}
                     ></span>
                   )}
                 </div>
-                <div className="w-[49px] text-center">
+                <div className="w-[26px] text-center">
                   {showHistStatus && (
                     <span
-                      className="inline-block rounded-full"
+                      className="inline-block rounded-full shadow-sm"
                       style={{
-                        width: "9.6px",
-                        height: "9.6px",
+                        width: "8px",
+                        height: "8px",
                         backgroundColor:
                           coin.histStatus === "green"
-                            ? "rgba(65, 207, 88, 0.8)"
-                            : "rgba(239, 68, 68, 0.8)",
+                            ? "rgba(16, 185, 129, 0.9)"
+                            : "rgba(239, 68, 68, 0.9)",
                         border: "none",
                       }}
                     ></span>
