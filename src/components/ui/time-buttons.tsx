@@ -67,11 +67,12 @@ const TimeButtons = () => {
       {displayIntervals.map((interval) => (
         <button
           key={interval}
-          className={`px-2 py-0.5 rounded text-[12.8px] border-none outline-none ${
+          className={`px-2 py-0.5 rounded text-[12.8px] ${
             activeTime === interval
               ? "bg-[#1a48d8] text-white"
               : "bg-gray-100 dark:bg-gray-700 text-[#222] dark:text-white hover:bg-gray-200 dark:hover:bg-gray-600"
           }`}
+          style={{ border: "none", outline: "none", boxShadow: "none" }}
           onClick={() => setActiveTime(interval)}
         >
           {interval}
@@ -81,7 +82,8 @@ const TimeButtons = () => {
       {/* Dropdown Button */}
       <div className="relative">
         <button
-          className="px-2 py-0.5 rounded bg-gray-100 dark:bg-gray-700 text-[#222] dark:text-white hover:bg-gray-200 dark:hover:bg-gray-600 flex items-center gap-1 text-[12.8px] border-none outline-none"
+          className="px-2 py-0.5 rounded bg-gray-100 dark:bg-gray-700 text-[#222] dark:text-white hover:bg-gray-200 dark:hover:bg-gray-600 flex items-center gap-1 text-[12.8px]"
+          style={{ border: "none", outline: "none", boxShadow: "none" }}
           onClick={() => setIsDropdownOpen(!isDropdownOpen)}
         >
           ▽
