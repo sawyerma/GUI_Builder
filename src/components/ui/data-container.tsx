@@ -39,7 +39,7 @@ export const DataRow = ({ data, onClick, layout = "trades" }: DataRowProps) => {
 
       {/* Data Row */}
       <div className="relative grid grid-cols-3 text-xs py-1 px-4">
-        <div className={`font-mono ${data.col1Color || "text-gray-600"}`}>
+        <div className={`font-medium ${data.col1Color || "text-gray-600"}`}>
           {layout === "trades" && data.arrow && (
             <span className="flex items-center">
               <span>{data.col1}</span>
@@ -51,12 +51,12 @@ export const DataRow = ({ data, onClick, layout = "trades" }: DataRowProps) => {
           {(layout === "orderbook" || !data.arrow) && <span>{data.col1}</span>}
         </div>
         <div
-          className={`text-center font-mono ${data.col2Color || "text-gray-600"}`}
+          className={`text-center font-medium ${data.col2Color || "text-gray-600"}`}
         >
           {data.col2}
         </div>
         <div
-          className={`text-right ${data.col3Color || "text-gray-600"} ${layout === "orderbook" ? "font-mono" : "text-xs"}`}
+          className={`text-right ${data.col3Color || "text-gray-600"} ${layout === "orderbook" ? "font-medium" : "text-xs font-medium"}`}
         >
           {data.col3}
         </div>
