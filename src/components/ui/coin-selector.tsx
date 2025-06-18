@@ -152,7 +152,7 @@ const CoinSelector = ({
         onClick={() => setIsOpen(!isOpen)}
       >
         {selectedCoin}&nbsp;&nbsp;&nbsp;&nbsp;
-        <span>▼</span>
+        <span>⌄</span>
       </button>
 
       {/* Dropdown Menu */}
