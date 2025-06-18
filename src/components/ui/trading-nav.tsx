@@ -15,11 +15,6 @@ const TradingNav = ({ onTradingModeChange }: TradingNavProps) => {
       icon: "💱",
     },
     {
-      name: "Futures-Übersicht",
-      description: "Entdecken Sie alle Futures-Produkte",
-      icon: "📊",
-    },
-    {
       name: "USDT-M Futures",
       description: "Perpetual-Futures abgerechnet in USDT",
       icon: "💰",
