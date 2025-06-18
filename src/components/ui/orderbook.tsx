@@ -20,6 +20,7 @@ interface OrderbookProps {
   orders?: OrderbookEntry[];
   trades?: Trade[];
   currentPrice?: number;
+  selectedCoin?: string;
   onDataUpdate?: (data: { orders: OrderbookEntry[]; trades: Trade[] }) => void;
   onTabChange?: (tab: "orderbook" | "trades") => void;
 }
@@ -28,6 +29,7 @@ const Orderbook = ({
   orders = [],
   trades = [],
   currentPrice = 104534.14,
+  selectedCoin = "BTC/USDT",
   onDataUpdate,
   onTabChange,
 }: OrderbookProps) => {
@@ -388,16 +390,24 @@ const Orderbook = ({
         {/* Column Headers */}
         {activeTab === "orderbook" && (
           <div className="grid grid-cols-3 text-xs text-gray-500 dark:text-gray-400 pb-2">
-            <div className="text-left">Preis (USDT)</div>
-            <div className="text-center">Betrag (BTC)</div>
+            <div className="text-left">
+              Preis ({selectedCoin.split("/")[1] || "USDT"})
+            </div>
+            <div className="text-center">
+              Betrag ({selectedCoin.split("/")[0] || "BTC"})
+            </div>
             <div className="text-right">Umsatz</div>
           </div>
         )}
 
         {activeTab === "trades" && (
           <div className="grid grid-cols-3 text-xs text-gray-500 dark:text-gray-400 pb-2">
-            <div className="text-left">Preis (USDT)</div>
-            <div className="text-center">Betrag (BTC)</div>
+            <div className="text-left">
+              Preis ({selectedCoin.split("/")[1] || "USDT"})
+            </div>
+            <div className="text-center">
+              Betrag ({selectedCoin.split("/")[0] || "BTC"})
+            </div>
             <div className="text-right">Zeit</div>
           </div>
         )}

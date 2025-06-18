@@ -28,7 +28,7 @@ const ChartSection = () => {
           {/* Orderbook Panel */}
           <ResizablePanel defaultSize={25} minSize={20} maxSize={50}>
             <div className="h-full">
-              <Orderbook />
+              <Orderbook selectedCoin="BTC/USDT" />
             </div>
           </ResizablePanel>
         </ResizablePanelGroup>
