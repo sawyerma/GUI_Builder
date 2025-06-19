@@ -36,7 +36,7 @@ class CustomIndicator:
     def __init__(self, name: str, period: int = 14):
         self.name = name
         self.period = period
-    
+
     def calculate(self, data: pd.DataFrame) -> pd.Series:
         """
         Calculate your custom indicator
@@ -45,20 +45,20 @@ class CustomIndicator:
         """
         # Example: Simple Moving Average
         return data['close'].rolling(window=self.period).mean()
-    
+
     def get_signals(self, data: pd.DataFrame) -> Dict[str, Any]:
         """
         Generate trading signals
         returns: Dictionary with signal information
         """
         indicator_values = self.calculate(data)
-        
+
         signals = {
             'buy_signal': indicator_values > data['close'],
             'sell_signal': indicator_values < data['close'],
             'strength': abs(indicator_values - data['close']) / data['close']
         }
-        
+
         return signals
 
 # Create and test your indicator
@@ -320,60 +320,58 @@ indicator = CustomIndicator("My SMA", period=20)
   };
 
   return (
-    <div
-      className={`bg-gray-800 border border-gray-700 rounded-lg overflow-hidden ${className}`}
-    >
-      {/* Header Bar */}
-      <div className="flex items-center justify-between bg-gray-900 px-4 py-2 border-b border-gray-700">
-        <div className="flex items-center gap-4">
-          <button
-            onClick={() => setIsExpanded(!isExpanded)}
-            className="flex items-center gap-2 text-gray-300 hover:text-white transition-colors"
-          >
-            {isExpanded ? <ChevronDown size={16} /> : <ChevronUp size={16} />}
-            <span className="font-medium">Trading Terminal</span>
-          </button>
+    <div className={className}>
+      {!isExpanded ? (
+        // Minimal collapsed state - just like price data text
+        <button
+          onClick={() => setIsExpanded(true)}
+          className="text-xs text-[#666] dark:text-gray-400 hover:text-[#333] dark:hover:text-gray-200 transition-colors"
+        >
+          Trading Terminal
+        </button>
+      ) : (
+        // Full expanded terminal
+        <div className="bg-gray-800 border border-gray-700 rounded-lg overflow-hidden">
+          {/* Header Bar */}
+          <div className="flex items-center justify-between bg-gray-900 px-4 py-2 border-b border-gray-700">
+            <div className="flex items-center gap-4">
+              <button
+                onClick={() => setIsExpanded(false)}
+                className="flex items-center gap-2 text-gray-300 hover:text-white transition-colors"
+              >
+                <ChevronDown size={16} />
+                <span className="font-medium">Trading Terminal</span>
+              </button>
 
-          {isExpanded && (
-            <div className="flex items-center">
-              {tabs.map((tab) => {
-                const Icon = tab.icon;
-                return (
-                  <button
-                    key={tab.id}
-                    onClick={() => setActiveTab(tab.id)}
-                    className={`flex items-center gap-2 px-3 py-1 text-sm transition-colors ${
-                      activeTab === tab.id
-                        ? "text-white bg-gray-700"
-                        : "text-gray-400 hover:text-gray-200"
-                    }`}
-                  >
-                    <Icon size={14} />
-                    {tab.name}
-                  </button>
-                );
-              })}
+              <div className="flex items-center">
+                {tabs.map((tab) => {
+                  const Icon = tab.icon;
+                  return (
+                    <button
+                      key={tab.id}
+                      onClick={() => setActiveTab(tab.id)}
+                      className={`flex items-center gap-2 px-3 py-1 text-sm transition-colors ${
+                        activeTab === tab.id
+                          ? "text-white bg-gray-700"
+                          : "text-gray-400 hover:text-gray-200"
+                      }`}
+                    >
+                      <Icon size={14} />
+                      {tab.name}
+                    </button>
+                  );
+                })}
+              </div>
             </div>
-          )}
-        </div>
 
-        {isExpanded && (
-          <div className="flex items-center gap-2 text-xs text-gray-400">
-            <span className="w-2 h-2 bg-green-400 rounded-full"></span>
-            Ready
+            <div className="flex items-center gap-2 text-xs text-gray-400">
+              <span className="w-2 h-2 bg-green-400 rounded-full"></span>
+              Ready
+            </div>
           </div>
-        )}
-      </div>
 
-      {/* Content */}
-      {isExpanded && <div className="h-96">{renderContent()}</div>}
-
-      {/* Collapsed State */}
-      {!isExpanded && (
-        <div className="p-4 text-center">
-          <div className="text-gray-400 text-sm">
-            Click to expand Trading Terminal • Python IDE & Indicators Framework
-          </div>
+          {/* Content */}
+          <div className="h-96">{renderContent()}</div>
         </div>
       )}
     </div>
