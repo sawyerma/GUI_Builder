@@ -6,6 +6,10 @@ import ChartSection from "../components/ui/chart-section";
 import CoinSelector from "../components/ui/coin-selector";
 import ThemeProvider from "../components/ui/theme-provider";
 import Database from "./Database";
+import AI from "./AI";
+import ML from "./ML";
+import Whales from "./Whales";
+import News from "./News";
 
 interface CoinData {
   id: string;
@@ -19,7 +23,9 @@ interface CoinData {
 }
 
 const Index = () => {
-  const [viewMode, setViewMode] = useState<"trading" | "database">("trading");
+  const [viewMode, setViewMode] = useState<
+    "trading" | "database" | "ai" | "ml" | "whales" | "news"
+  >("trading");
   const [selectedCoin, setSelectedCoin] = useState("BTC/USDT");
   const [currentCoinData, setCurrentCoinData] = useState<CoinData>({
     id: "1",
@@ -50,9 +56,21 @@ const Index = () => {
     setCurrentCoinData(coin);
   };
 
-  // Show Database view when in database mode
+  // Show different views based on mode
   if (viewMode === "database") {
     return <Database />;
+  }
+  if (viewMode === "ai") {
+    return <AI />;
+  }
+  if (viewMode === "ml") {
+    return <ML />;
+  }
+  if (viewMode === "whales") {
+    return <Whales />;
+  }
+  if (viewMode === "news") {
+    return <News />;
   }
 
   return (
@@ -64,31 +82,74 @@ const Index = () => {
         }}
       >
         {/* Design Mode Switcher - Only visible for development */}
-        <div className="fixed top-4 right-20 z-50 flex gap-2 bg-white dark:bg-gray-800 p-2 rounded-lg shadow-lg border dark:border-gray-600">
+        <div className="fixed top-4 right-20 z-50 flex flex-wrap gap-1 bg-white dark:bg-gray-800 p-2 rounded-lg shadow-lg border dark:border-gray-600 max-w-80">
           <button
             onClick={() => setViewMode("trading")}
-            className={`px-3 py-1 text-xs rounded transition-colors ${
+            className={`px-2 py-1 text-xs rounded transition-colors ${
               viewMode === "trading"
                 ? "bg-blue-500 text-white"
                 : "bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600"
             }`}
           >
-            Trading View
+            Trading
           </button>
           <button
             onClick={() => setViewMode("database")}
-            className={`px-3 py-1 text-xs rounded transition-colors ${
+            className={`px-2 py-1 text-xs rounded transition-colors ${
               viewMode === "database"
                 ? "bg-blue-500 text-white"
                 : "bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600"
             }`}
           >
-            Database View
+            Database
+          </button>
+          <button
+            onClick={() => setViewMode("ai")}
+            className={`px-2 py-1 text-xs rounded transition-colors ${
+              viewMode === "ai"
+                ? "bg-blue-500 text-white"
+                : "bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600"
+            }`}
+          >
+            AI
+          </button>
+          <button
+            onClick={() => setViewMode("ml")}
+            className={`px-2 py-1 text-xs rounded transition-colors ${
+              viewMode === "ml"
+                ? "bg-blue-500 text-white"
+                : "bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600"
+            }`}
+          >
+            ML
+          </button>
+          <button
+            onClick={() => setViewMode("whales")}
+            className={`px-2 py-1 text-xs rounded transition-colors ${
+              viewMode === "whales"
+                ? "bg-blue-500 text-white"
+                : "bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600"
+            }`}
+          >
+            Whales
+          </button>
+          <button
+            onClick={() => setViewMode("news")}
+            className={`px-2 py-1 text-xs rounded transition-colors ${
+              viewMode === "news"
+                ? "bg-blue-500 text-white"
+                : "bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600"
+            }`}
+          >
+            News
           </button>
         </div>
 
         {/* Top Navigation */}
-        <TradingNav onTradingModeChange={setTradingMode} />
+        <TradingNav
+          onTradingModeChange={setTradingMode}
+          onViewChange={setViewMode}
+        />
 
         {/* Market & Price Section */}
         <div className="flex gap-5 max-lg:flex-col max-lg:gap-0">

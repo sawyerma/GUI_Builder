@@ -4,9 +4,12 @@ import SettingsModal from "./settings-modal";
 
 interface TradingNavProps {
   onTradingModeChange?: (mode: string) => void;
+  onViewChange?: (
+    view: "trading" | "database" | "ai" | "ml" | "whales" | "news",
+  ) => void;
 }
 
-const TradingNav = ({ onTradingModeChange }: TradingNavProps) => {
+const TradingNav = ({ onTradingModeChange, onViewChange }: TradingNavProps) => {
   const [activeTab, setActiveTab] = useState("Spot");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
@@ -56,8 +59,32 @@ const TradingNav = ({ onTradingModeChange }: TradingNavProps) => {
       setIsSettingsOpen(true);
       setIsDropdownOpen(false);
     } else if (itemName === "Database") {
-      // Open database page in new tab
-      window.open("/database", "_blank");
+      if (onViewChange) {
+        onViewChange("database");
+      } else {
+        // Fallback: open in new tab
+        window.open("/database", "_blank");
+      }
+      setIsDropdownOpen(false);
+    } else if (itemName === "AI") {
+      if (onViewChange) {
+        onViewChange("ai");
+      }
+      setIsDropdownOpen(false);
+    } else if (itemName === "ML") {
+      if (onViewChange) {
+        onViewChange("ml");
+      }
+      setIsDropdownOpen(false);
+    } else if (itemName === "Whales") {
+      if (onViewChange) {
+        onViewChange("whales");
+      }
+      setIsDropdownOpen(false);
+    } else if (itemName === "News") {
+      if (onViewChange) {
+        onViewChange("news");
+      }
       setIsDropdownOpen(false);
     } else {
       setActiveTab(itemName);
