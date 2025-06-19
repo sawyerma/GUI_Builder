@@ -57,7 +57,7 @@ const TradingNav = ({ onTradingModeChange }: TradingNavProps) => {
       setIsDropdownOpen(false);
     } else if (itemName === "Database") {
       // Open database page in new tab
-      window.open("http://localhost:5173/database.html", "_blank");
+      window.open("/database", "_blank");
       setIsDropdownOpen(false);
     } else {
       setActiveTab(itemName);
