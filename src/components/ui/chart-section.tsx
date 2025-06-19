@@ -39,13 +39,13 @@ const ChartSection = ({
         </ResizablePanelGroup>
       </div>
 
-      {/* Latency and System Status - positioned above terminal */}
-      <div className="flex justify-end">
+      {/* Trading Terminal */}
+      <TradingTerminal className="mt-4" />
+
+      {/* Latency and System Status - positioned at bottom right, fixed */}
+      <div className="fixed bottom-4 right-4 z-30">
         <LatencyIndicators systemStatus="stable" />
       </div>
-
-      {/* Trading Terminal */}
-      <TradingTerminal className="mt-2" />
     </div>
   );
 };

@@ -206,9 +206,9 @@ indicator = CustomIndicator("My SMA", period=20)
           />
 
           {/* Line Numbers */}
-          <div className="absolute left-0 top-0 w-10 h-full bg-gray-50 dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 p-3 font-mono text-xs text-gray-500 dark:text-gray-500 pointer-events-none">
+          <div className="absolute left-0 top-0 w-10 bg-gray-50 dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 p-3 font-mono text-xs text-gray-500 dark:text-gray-500 pointer-events-none overflow-hidden">
             {code.split("\n").map((_, i) => (
-              <div key={i} style={{ lineHeight: "1.5" }}>
+              <div key={i} style={{ lineHeight: "1.4", height: "16.8px" }}>
                 {i + 1}
               </div>
             ))}
