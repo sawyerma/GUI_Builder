@@ -58,19 +58,19 @@ const Index = () => {
 
   // Show different views based on mode
   if (viewMode === "database") {
-    return <Database />;
+    return <Database onBackToTrading={() => setViewMode("trading")} />;
   }
   if (viewMode === "ai") {
-    return <AI />;
+    return <AI onBackToTrading={() => setViewMode("trading")} />;
   }
   if (viewMode === "ml") {
-    return <ML />;
+    return <ML onBackToTrading={() => setViewMode("trading")} />;
   }
   if (viewMode === "whales") {
-    return <Whales />;
+    return <Whales onBackToTrading={() => setViewMode("trading")} />;
   }
   if (viewMode === "news") {
-    return <News />;
+    return <News onBackToTrading={() => setViewMode("trading")} />;
   }
 
   return (

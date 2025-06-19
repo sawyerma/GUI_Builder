@@ -2,7 +2,11 @@ import { useState } from "react";
 import ThemeProvider from "../components/ui/theme-provider";
 import ThemeToggle from "../components/ui/theme-toggle";
 
-const Whales = () => {
+interface WhalesProps {
+  onBackToTrading?: () => void;
+}
+
+const Whales = ({ onBackToTrading }: WhalesProps = {}) => {
   const [activeTracker, setActiveTracker] = useState("movements");
 
   const sidebarItems = [
@@ -153,6 +157,14 @@ const Whales = () => {
         <div className="border-b border-gray-200 dark:border-gray-700">
           <div className="px-6 py-4 flex items-center justify-between">
             <div className="flex items-center gap-4">
+              {onBackToTrading && (
+                <button
+                  onClick={onBackToTrading}
+                  className="px-3 py-2 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors flex items-center gap-2"
+                >
+                  ← Back to Trading
+                </button>
+              )}
               <h1 className="text-2xl font-bold">Whale Tracker</h1>
               <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200">
                 Real-time

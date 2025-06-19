@@ -2,7 +2,11 @@ import { useState } from "react";
 import ThemeProvider from "../components/ui/theme-provider";
 import ThemeToggle from "../components/ui/theme-toggle";
 
-const ML = () => {
+interface MLProps {
+  onBackToTrading?: () => void;
+}
+
+const ML = ({ onBackToTrading }: MLProps = {}) => {
   const [activeAlgorithm, setActiveAlgorithm] = useState("regression");
 
   const sidebarItems = [
@@ -75,6 +79,14 @@ const ML = () => {
         <div className="border-b border-gray-200 dark:border-gray-700">
           <div className="px-6 py-4 flex items-center justify-between">
             <div className="flex items-center gap-4">
+              {onBackToTrading && (
+                <button
+                  onClick={onBackToTrading}
+                  className="px-3 py-2 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors flex items-center gap-2"
+                >
+                  ← Back to Trading
+                </button>
+              )}
               <h1 className="text-2xl font-bold">Machine Learning</h1>
               <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200">
                 Deep Learning
