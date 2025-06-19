@@ -153,9 +153,9 @@ indicator = CustomIndicator("My SMA", period=20)
     <div className="flex h-full">
       {/* File Explorer */}
       <div className="w-64 bg-gray-50 dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 flex flex-col">
-        <div className="p-3 border-b border-gray-200 dark:border-gray-700">
+        <div className="p-2 border-b border-gray-200 dark:border-gray-700">
           <div className="flex items-center justify-between">
-            <h4 className="text-sm font-medium text-gray-700 dark:text-gray-300 flex items-center gap-2">
+            <h4 className="text-xs font-medium text-gray-700 dark:text-gray-300 flex items-center gap-2">
               <Folder size={16} />
               Indicators
             </h4>
@@ -169,7 +169,7 @@ indicator = CustomIndicator("My SMA", period=20)
             <div
               key={index}
               onClick={() => setActiveFile(file.name)}
-              className={`flex items-center gap-2 px-2 py-1 rounded text-sm cursor-pointer transition-colors ${
+              className={`flex items-center gap-2 px-2 py-1 rounded text-xs cursor-pointer transition-colors ${
                 activeFile === file.name
                   ? "bg-blue-600 text-white"
                   : "text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700"
@@ -200,13 +200,13 @@ indicator = CustomIndicator("My SMA", period=20)
           <textarea
             value={code}
             onChange={(e) => setCode(e.target.value)}
-            className="w-full h-full bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 p-4 font-mono text-sm resize-none focus:outline-none"
-            style={{ lineHeight: "1.5", paddingLeft: "3rem" }}
+            className="w-full h-full bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 p-3 font-mono text-xs resize-none focus:outline-none"
+            style={{ lineHeight: "1.4", paddingLeft: "2.5rem" }}
             spellCheck={false}
           />
 
           {/* Line Numbers */}
-          <div className="absolute left-0 top-0 w-12 h-full bg-gray-50 dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 p-4 font-mono text-sm text-gray-500 dark:text-gray-500 pointer-events-none">
+          <div className="absolute left-0 top-0 w-10 h-full bg-gray-50 dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 p-3 font-mono text-xs text-gray-500 dark:text-gray-500 pointer-events-none">
             {code.split("\n").map((_, i) => (
               <div key={i} style={{ lineHeight: "1.5" }}>
                 {i + 1}
@@ -215,18 +215,8 @@ indicator = CustomIndicator("My SMA", period=20)
           </div>
         </div>
 
-        {/* Action Buttons */}
-        <div className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700">
-          <div className="flex items-center gap-2">
-            <button className="flex items-center gap-2 px-3 py-1 bg-green-600 text-white rounded text-sm hover:bg-green-700 transition-colors">
-              <Play size={14} />
-              Run Script
-            </button>
-            <button className="flex items-center gap-2 px-3 py-1 bg-blue-600 text-white rounded text-sm hover:bg-blue-700 transition-colors">
-              <Save size={14} />
-              Save
-            </button>
-          </div>
+        {/* Status Bar */}
+        <div className="flex items-center justify-end p-2 bg-gray-50 dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700">
           <div className="text-xs text-gray-500 dark:text-gray-400">
             Python 3.11 • UTF-8 • Ln 42, Col 1
           </div>
@@ -240,7 +230,7 @@ indicator = CustomIndicator("My SMA", period=20)
       {/* Terminal Output */}
       <div
         ref={terminalRef}
-        className="flex-1 p-4 font-mono text-sm text-gray-900 dark:text-gray-100 overflow-y-auto"
+        className="flex-1 p-3 font-mono text-xs text-gray-900 dark:text-gray-100 overflow-y-auto"
         style={{ minHeight: "200px" }}
       >
         {terminalOutput.map((line, index) => (
@@ -251,8 +241,8 @@ indicator = CustomIndicator("My SMA", period=20)
       </div>
 
       {/* Terminal Input */}
-      <div className="border-t border-gray-200 dark:border-gray-700 p-4">
-        <div className="flex items-center gap-2 font-mono text-sm">
+      <div className="border-t border-gray-200 dark:border-gray-700 p-3">
+        <div className="flex items-center gap-2 font-mono text-xs">
           <span className="text-green-600 dark:text-green-400">
             trading@terminal:~$
           </span>
@@ -271,7 +261,7 @@ indicator = CustomIndicator("My SMA", period=20)
   );
 
   const renderOutput = () => (
-    <div className="h-full bg-white dark:bg-gray-900 p-4 font-mono text-sm text-gray-900 dark:text-gray-100">
+    <div className="h-full bg-white dark:bg-gray-900 p-3 font-mono text-xs text-gray-900 dark:text-gray-100">
       <div className="text-green-600 dark:text-green-400 mb-2">
         Script Output:
       </div>
@@ -302,7 +292,7 @@ indicator = CustomIndicator("My SMA", period=20)
   );
 
   const renderProblems = () => (
-    <div className="h-full bg-white dark:bg-gray-900 p-4 text-sm">
+    <div className="h-full bg-white dark:bg-gray-900 p-3 text-xs">
       <div className="text-green-600 dark:text-green-400 mb-2">
         ✓ No problems detected
       </div>
@@ -372,9 +362,21 @@ indicator = CustomIndicator("My SMA", period=20)
               </div>
             </div>
 
-            <div className="flex items-center gap-2 text-xs text-gray-500 dark:text-gray-400">
-              <span className="w-2 h-2 bg-green-500 rounded-full"></span>
-              Ready
+            <div className="flex items-center gap-3">
+              <div className="flex items-center gap-2">
+                <button className="flex items-center gap-1 px-2 py-1 bg-green-600 text-white rounded text-xs hover:bg-green-700 transition-colors">
+                  <Play size={12} />
+                  Run Script
+                </button>
+                <button className="flex items-center gap-1 px-2 py-1 bg-blue-600 text-white rounded text-xs hover:bg-blue-700 transition-colors">
+                  <Save size={12} />
+                  Save
+                </button>
+              </div>
+              <div className="flex items-center gap-2 text-xs text-gray-500 dark:text-gray-400">
+                <span className="w-2 h-2 bg-green-500 rounded-full"></span>
+                Ready
+              </div>
             </div>
           </div>
 
