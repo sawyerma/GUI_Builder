@@ -42,8 +42,8 @@ const ChartSection = ({
       {/* Trading Terminal */}
       <TradingTerminal className="mt-4" />
 
-      {/* Latency and System Status - positioned at bottom right, fixed */}
-      <div className="fixed bottom-4 right-4 z-30">
+      {/* Latency and System Status - positioned below terminal in document flow */}
+      <div className="flex justify-end mt-4">
         <LatencyIndicators systemStatus="stable" />
       </div>
     </div>
