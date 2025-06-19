@@ -46,9 +46,6 @@ const ChartSection = ({
 
       {/* Trading Terminal */}
       <TradingTerminal className="mt-4" />
-
-      {/* Latency and System Status */}
-      <LatencyIndicators systemStatus="stable" />
     </div>
   );
 };
