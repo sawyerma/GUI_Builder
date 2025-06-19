@@ -69,6 +69,8 @@ indicator = CustomIndicator("My SMA", period=20)
 `);
 
   const terminalRef = useRef<HTMLDivElement>(null);
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const lineNumbersRef = useRef<HTMLDivElement>(null);
 
   const files = [
     { name: "main.py", type: "python", active: true },
@@ -99,7 +101,7 @@ indicator = CustomIndicator("My SMA", period=20)
         break;
       case "run":
         newOutput.push("Executing script...");
-        newOutput.push("�� Script executed successfully");
+        newOutput.push("✓ Script executed successfully");
         newOutput.push("CustomIndicator initialized with period=20");
         break;
       case "test":
@@ -140,6 +142,12 @@ indicator = CustomIndicator("My SMA", period=20)
     if (e.key === "Enter") {
       handleTerminalCommand(terminalInput);
       setTerminalInput("");
+    }
+  };
+
+  const handleTextareaScroll = () => {
+    if (textareaRef.current && lineNumbersRef.current) {
+      lineNumbersRef.current.scrollTop = textareaRef.current.scrollTop;
     }
   };
 
@@ -199,14 +207,14 @@ indicator = CustomIndicator("My SMA", period=20)
         <div className="flex-1 relative overflow-hidden">
           <div className="flex h-full">
             {/* Line Numbers */}
-            <div className="w-10 bg-gray-50 dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 p-3 font-mono text-xs text-gray-500 dark:text-gray-500 flex-shrink-0 overflow-hidden">
+            <div
+              ref={lineNumbersRef}
+              className="w-10 bg-gray-50 dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 p-3 font-mono text-xs text-gray-500 dark:text-gray-500 flex-shrink-0 overflow-hidden"
+            >
               {Array.from(
-                { length: Math.max(50, code.split("\n").length) },
+                { length: Math.max(100, code.split("\n").length + 10) },
                 (_, i) => (
-                  <div
-                    key={i}
-                    style={{ lineHeight: "1.4", minHeight: "16.8px" }}
-                  >
+                  <div key={i} style={{ lineHeight: "1.4", height: "16.8px" }}>
                     {i + 1}
                   </div>
                 ),
@@ -215,8 +223,10 @@ indicator = CustomIndicator("My SMA", period=20)
 
             {/* Code Editor */}
             <textarea
+              ref={textareaRef}
               value={code}
               onChange={(e) => setCode(e.target.value)}
+              onScroll={handleTextareaScroll}
               className="flex-1 h-full bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 p-3 font-mono text-xs resize-none focus:outline-none border-none"
               style={{ lineHeight: "1.4" }}
               spellCheck={false}
