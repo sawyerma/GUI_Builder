@@ -7,6 +7,7 @@ import {
 import Orderbook from "./orderbook";
 import TradingChart from "./trading-chart";
 import LatencyIndicators from "./latency-indicators";
+import TradingTerminal from "./trading-terminal";
 
 const ChartSection = ({
   selectedCoin = "BTC/USDT",
@@ -14,7 +15,7 @@ const ChartSection = ({
   selectedCoin?: string;
 }) => {
   return (
-    <div className="mt-1">
+    <div className="mt-1 space-y-4">
       <div className="h-[500px]">
         <ResizablePanelGroup
           direction="horizontal"
@@ -39,9 +40,12 @@ const ChartSection = ({
       </div>
 
       {/* Instructions */}
-      <div className="mt-2 text-xs text-gray-500 dark:text-gray-400 text-center">
+      <div className="text-xs text-gray-500 dark:text-gray-400 text-center">
         Ziehen Sie den Griff zwischen den Bereichen, um die Größe anzupassen
       </div>
+
+      {/* Trading Terminal */}
+      <TradingTerminal className="mt-4" />
 
       {/* Latency and System Status */}
       <LatencyIndicators systemStatus="stable" />
