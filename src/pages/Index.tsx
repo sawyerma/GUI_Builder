@@ -5,6 +5,7 @@ import TimeButtons from "../components/ui/time-buttons";
 import ChartSection from "../components/ui/chart-section";
 import CoinSelector from "../components/ui/coin-selector";
 import ThemeProvider from "../components/ui/theme-provider";
+import Database from "./Database";
 
 interface CoinData {
   id: string;
@@ -18,6 +19,7 @@ interface CoinData {
 }
 
 const Index = () => {
+  const [viewMode, setViewMode] = useState<"trading" | "database">("trading");
   const [selectedCoin, setSelectedCoin] = useState("BTC/USDT");
   const [currentCoinData, setCurrentCoinData] = useState<CoinData>({
     id: "1",
@@ -48,6 +50,11 @@ const Index = () => {
     setCurrentCoinData(coin);
   };
 
+  // Show Database view when in database mode
+  if (viewMode === "database") {
+    return <Database />;
+  }
+
   return (
     <ThemeProvider>
       <div
@@ -56,6 +63,30 @@ const Index = () => {
           fontFamily: "'Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'",
         }}
       >
+        {/* Design Mode Switcher - Only visible for development */}
+        <div className="fixed top-4 right-20 z-50 flex gap-2 bg-white dark:bg-gray-800 p-2 rounded-lg shadow-lg border dark:border-gray-600">
+          <button
+            onClick={() => setViewMode("trading")}
+            className={`px-3 py-1 text-xs rounded transition-colors ${
+              viewMode === "trading"
+                ? "bg-blue-500 text-white"
+                : "bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600"
+            }`}
+          >
+            Trading View
+          </button>
+          <button
+            onClick={() => setViewMode("database")}
+            className={`px-3 py-1 text-xs rounded transition-colors ${
+              viewMode === "database"
+                ? "bg-blue-500 text-white"
+                : "bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600"
+            }`}
+          >
+            Database View
+          </button>
+        </div>
+
         {/* Top Navigation */}
         <TradingNav onTradingModeChange={setTradingMode} />
 
