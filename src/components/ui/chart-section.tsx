@@ -40,7 +40,14 @@ const ChartSection = ({
       </div>
 
       {/* Trading Terminal */}
-      <TradingTerminal className="mt-4" />
+      <div className="mt-4 space-y-2">
+        <TradingTerminal />
+
+        {/* System Status - ALWAYS below terminal, never overlaps */}
+        <div className="flex justify-end">
+          <LatencyIndicators systemStatus="stable" />
+        </div>
+      </div>
     </div>
   );
 };

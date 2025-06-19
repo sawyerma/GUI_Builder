@@ -11,7 +11,6 @@ import {
   Plus,
   X,
 } from "lucide-react";
-import LatencyIndicators from "./latency-indicators";
 
 interface TradingTerminalProps {
   className?: string;
@@ -238,7 +237,7 @@ indicator = CustomIndicator("My SMA", period=20)
         {/* Status Bar */}
         <div className="flex items-center justify-end p-2 bg-gray-50 dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700">
           <div className="text-xs text-gray-500 dark:text-gray-400">
-            Python 3.11 • UTF-8 ��� Ln 42, Col 1
+            Python 3.11 • UTF-8 • Ln 42, Col 1
           </div>
         </div>
       </div>
@@ -402,13 +401,6 @@ indicator = CustomIndicator("My SMA", period=20)
 
           {/* Content */}
           <div className="h-96">{renderContent()}</div>
-
-          {/* System Status integrated at bottom of terminal */}
-          <div className="border-t border-gray-200 dark:border-gray-700 p-2 bg-gray-50 dark:bg-gray-800">
-            <div className="flex justify-end">
-              <LatencyIndicators systemStatus="stable" />
-            </div>
-          </div>
         </div>
       )}
     </div>
