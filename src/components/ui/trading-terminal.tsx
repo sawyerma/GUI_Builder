@@ -1,0 +1,383 @@
+import { useState, useRef, useEffect } from "react";
+import {
+  ChevronUp,
+  ChevronDown,
+  Play,
+  Save,
+  Folder,
+  FileText,
+  Terminal,
+  Code,
+  Plus,
+  X,
+} from "lucide-react";
+
+interface TradingTerminalProps {
+  className?: string;
+}
+
+const TradingTerminal = ({ className = "" }: TradingTerminalProps) => {
+  const [isExpanded, setIsExpanded] = useState(false);
+  const [activeTab, setActiveTab] = useState("editor");
+  const [activeFile, setActiveFile] = useState("main.py");
+  const [terminalOutput, setTerminalOutput] = useState<string[]>([
+    "Trading Terminal v1.0.0",
+    "Python 3.11.0 | Indicators Framework Ready",
+    "Type 'help' for available commands",
+    "",
+  ]);
+  const [terminalInput, setTerminalInput] = useState("");
+  const [code, setCode] = useState(`# Trading Indicator Script
+import pandas as pd
+import numpy as np
+from typing import Dict, List, Any
+
+class CustomIndicator:
+    def __init__(self, name: str, period: int = 14):
+        self.name = name
+        self.period = period
+    
+    def calculate(self, data: pd.DataFrame) -> pd.Series:
+        """
+        Calculate your custom indicator
+        data: DataFrame with columns ['open', 'high', 'low', 'close', 'volume']
+        returns: Series with indicator values
+        """
+        # Example: Simple Moving Average
+        return data['close'].rolling(window=self.period).mean()
+    
+    def get_signals(self, data: pd.DataFrame) -> Dict[str, Any]:
+        """
+        Generate trading signals
+        returns: Dictionary with signal information
+        """
+        indicator_values = self.calculate(data)
+        
+        signals = {
+            'buy_signal': indicator_values > data['close'],
+            'sell_signal': indicator_values < data['close'],
+            'strength': abs(indicator_values - data['close']) / data['close']
+        }
+        
+        return signals
+
+# Create and test your indicator
+indicator = CustomIndicator("My SMA", period=20)
+
+# To add to indicators database, use:
+# register_indicator(indicator)
+`);
+
+  const terminalRef = useRef<HTMLDivElement>(null);
+
+  const files = [
+    { name: "main.py", type: "python", active: true },
+    { name: "rsi_custom.py", type: "python", active: false },
+    { name: "macd_enhanced.py", type: "python", active: false },
+    { name: "volume_profile.py", type: "python", active: false },
+  ];
+
+  const tabs = [
+    { id: "editor", name: "Code Editor", icon: Code },
+    { id: "terminal", name: "Terminal", icon: Terminal },
+    { id: "output", name: "Output", icon: FileText },
+    { id: "problems", name: "Problems", icon: FileText },
+  ];
+
+  const handleTerminalCommand = (command: string) => {
+    const newOutput = [...terminalOutput, `> ${command}`];
+
+    // Simulate command processing
+    switch (command.toLowerCase().trim()) {
+      case "help":
+        newOutput.push("Available commands:");
+        newOutput.push("  run          - Execute current script");
+        newOutput.push("  test         - Test indicator with sample data");
+        newOutput.push("  register     - Add indicator to database");
+        newOutput.push("  list         - Show available indicators");
+        newOutput.push("  clear        - Clear terminal");
+        break;
+      case "run":
+        newOutput.push("Executing script...");
+        newOutput.push("✓ Script executed successfully");
+        newOutput.push("CustomIndicator initialized with period=20");
+        break;
+      case "test":
+        newOutput.push("Testing indicator with sample BTC/USDT data...");
+        newOutput.push("✓ Indicator test passed");
+        newOutput.push("Generated 100 data points");
+        newOutput.push("Buy signals: 23, Sell signals: 18");
+        break;
+      case "register":
+        newOutput.push("Registering indicator in database...");
+        newOutput.push("✓ CustomIndicator added to indicators database");
+        newOutput.push("Available in Indicators modal");
+        break;
+      case "list":
+        newOutput.push("Available custom indicators:");
+        newOutput.push("  - CustomIndicator (SMA-based)");
+        newOutput.push("  - RSI_Enhanced");
+        newOutput.push("  - MACD_Advanced");
+        newOutput.push("  - VolumeProfile");
+        break;
+      case "clear":
+        setTerminalOutput([
+          "Trading Terminal v1.0.0",
+          "Type 'help' for available commands",
+          "",
+        ]);
+        return;
+      default:
+        newOutput.push(`Command not found: ${command}`);
+        newOutput.push("Type 'help' for available commands");
+    }
+
+    newOutput.push("");
+    setTerminalOutput(newOutput);
+  };
+
+  const handleKeyPress = (e: React.KeyboardEvent) => {
+    if (e.key === "Enter") {
+      handleTerminalCommand(terminalInput);
+      setTerminalInput("");
+    }
+  };
+
+  useEffect(() => {
+    if (terminalRef.current) {
+      terminalRef.current.scrollTop = terminalRef.current.scrollHeight;
+    }
+  }, [terminalOutput]);
+
+  const renderEditor = () => (
+    <div className="flex h-full">
+      {/* File Explorer */}
+      <div className="w-64 bg-gray-800 border-r border-gray-700 flex flex-col">
+        <div className="p-3 border-b border-gray-700">
+          <div className="flex items-center justify-between">
+            <h4 className="text-sm font-medium text-gray-300 flex items-center gap-2">
+              <Folder size={16} />
+              Indicators
+            </h4>
+            <button className="text-gray-400 hover:text-white">
+              <Plus size={16} />
+            </button>
+          </div>
+        </div>
+        <div className="flex-1 p-2">
+          {files.map((file, index) => (
+            <div
+              key={index}
+              onClick={() => setActiveFile(file.name)}
+              className={`flex items-center gap-2 px-2 py-1 rounded text-sm cursor-pointer transition-colors ${
+                activeFile === file.name
+                  ? "bg-blue-600 text-white"
+                  : "text-gray-300 hover:bg-gray-700"
+              }`}
+            >
+              <FileText size={14} />
+              {file.name}
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Code Editor */}
+      <div className="flex-1 flex flex-col">
+        {/* Editor Tabs */}
+        <div className="flex items-center bg-gray-900 border-b border-gray-700">
+          <div className="flex items-center px-3 py-2 bg-gray-800 text-white text-sm border-r border-gray-700">
+            <FileText size={14} className="mr-2" />
+            {activeFile}
+            <button className="ml-2 text-gray-400 hover:text-white">
+              <X size={12} />
+            </button>
+          </div>
+        </div>
+
+        {/* Code Area */}
+        <div className="flex-1 relative">
+          <textarea
+            value={code}
+            onChange={(e) => setCode(e.target.value)}
+            className="w-full h-full bg-gray-900 text-gray-100 p-4 font-mono text-sm resize-none focus:outline-none"
+            style={{ lineHeight: "1.5" }}
+            spellCheck={false}
+          />
+
+          {/* Line Numbers */}
+          <div className="absolute left-0 top-0 w-12 h-full bg-gray-800 border-r border-gray-700 p-4 font-mono text-sm text-gray-500 pointer-events-none">
+            {code.split("\n").map((_, i) => (
+              <div key={i} style={{ lineHeight: "1.5" }}>
+                {i + 1}
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Action Buttons */}
+        <div className="flex items-center justify-between p-3 bg-gray-800 border-t border-gray-700">
+          <div className="flex items-center gap-2">
+            <button className="flex items-center gap-2 px-3 py-1 bg-green-600 text-white rounded text-sm hover:bg-green-700 transition-colors">
+              <Play size={14} />
+              Run Script
+            </button>
+            <button className="flex items-center gap-2 px-3 py-1 bg-blue-600 text-white rounded text-sm hover:bg-blue-700 transition-colors">
+              <Save size={14} />
+              Save
+            </button>
+          </div>
+          <div className="text-xs text-gray-400">
+            Python 3.11 • UTF-8 • Ln 42, Col 1
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+
+  const renderTerminal = () => (
+    <div className="h-full bg-gray-900 flex flex-col">
+      {/* Terminal Output */}
+      <div
+        ref={terminalRef}
+        className="flex-1 p-4 font-mono text-sm text-gray-100 overflow-y-auto"
+        style={{ minHeight: "200px" }}
+      >
+        {terminalOutput.map((line, index) => (
+          <div key={index} className="whitespace-pre-wrap">
+            {line}
+          </div>
+        ))}
+      </div>
+
+      {/* Terminal Input */}
+      <div className="border-t border-gray-700 p-4">
+        <div className="flex items-center gap-2 font-mono text-sm">
+          <span className="text-green-400">trading@terminal:~$</span>
+          <input
+            type="text"
+            value={terminalInput}
+            onChange={(e) => setTerminalInput(e.target.value)}
+            onKeyPress={handleKeyPress}
+            className="flex-1 bg-transparent text-gray-100 focus:outline-none"
+            placeholder="Enter command..."
+            autoFocus
+          />
+        </div>
+      </div>
+    </div>
+  );
+
+  const renderOutput = () => (
+    <div className="h-full bg-gray-900 p-4 font-mono text-sm text-gray-100">
+      <div className="text-green-400 mb-2">Script Output:</div>
+      <div className="text-gray-300">
+        ✓ CustomIndicator initialized successfully
+        <br />
+        ✓ Period: 20
+        <br />
+        ✓ Ready for data processing
+        <br />
+        <br />
+        <span className="text-blue-400">Sample calculation results:</span>
+        <br />
+        Data points processed: 1000
+        <br />
+        Moving average calculated for BTC/USDT
+        <br />
+        Signal strength: High (0.85)
+        <br />
+        <br />
+        <span className="text-yellow-400">
+          Indicator registered in database ✓
+        </span>
+      </div>
+    </div>
+  );
+
+  const renderProblems = () => (
+    <div className="h-full bg-gray-900 p-4 text-sm">
+      <div className="text-green-400 mb-2">✓ No problems detected</div>
+      <div className="text-gray-400">
+        Your indicator code is syntactically correct and follows best practices.
+      </div>
+    </div>
+  );
+
+  const renderContent = () => {
+    switch (activeTab) {
+      case "editor":
+        return renderEditor();
+      case "terminal":
+        return renderTerminal();
+      case "output":
+        return renderOutput();
+      case "problems":
+        return renderProblems();
+      default:
+        return renderEditor();
+    }
+  };
+
+  return (
+    <div
+      className={`bg-gray-800 border border-gray-700 rounded-lg overflow-hidden ${className}`}
+    >
+      {/* Header Bar */}
+      <div className="flex items-center justify-between bg-gray-900 px-4 py-2 border-b border-gray-700">
+        <div className="flex items-center gap-4">
+          <button
+            onClick={() => setIsExpanded(!isExpanded)}
+            className="flex items-center gap-2 text-gray-300 hover:text-white transition-colors"
+          >
+            {isExpanded ? <ChevronDown size={16} /> : <ChevronUp size={16} />}
+            <span className="font-medium">Trading Terminal</span>
+          </button>
+
+          {isExpanded && (
+            <div className="flex items-center">
+              {tabs.map((tab) => {
+                const Icon = tab.icon;
+                return (
+                  <button
+                    key={tab.id}
+                    onClick={() => setActiveTab(tab.id)}
+                    className={`flex items-center gap-2 px-3 py-1 text-sm transition-colors ${
+                      activeTab === tab.id
+                        ? "text-white bg-gray-700"
+                        : "text-gray-400 hover:text-gray-200"
+                    }`}
+                  >
+                    <Icon size={14} />
+                    {tab.name}
+                  </button>
+                );
+              })}
+            </div>
+          )}
+        </div>
+
+        {isExpanded && (
+          <div className="flex items-center gap-2 text-xs text-gray-400">
+            <span className="w-2 h-2 bg-green-400 rounded-full"></span>
+            Ready
+          </div>
+        )}
+      </div>
+
+      {/* Content */}
+      {isExpanded && <div className="h-96">{renderContent()}</div>}
+
+      {/* Collapsed State */}
+      {!isExpanded && (
+        <div className="p-4 text-center">
+          <div className="text-gray-400 text-sm">
+            Click to expand Trading Terminal • Python IDE & Indicators Framework
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default TradingTerminal;
