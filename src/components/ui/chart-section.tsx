@@ -39,13 +39,13 @@ const ChartSection = ({
         </ResizablePanelGroup>
       </div>
 
-      {/* Instructions */}
-      <div className="text-xs text-gray-500 dark:text-gray-400 text-center">
-        Ziehen Sie den Griff zwischen den Bereichen, um die Größe anzupassen
+      {/* Latency and System Status - positioned above terminal */}
+      <div className="flex justify-end">
+        <LatencyIndicators systemStatus="stable" />
       </div>
 
       {/* Trading Terminal */}
-      <TradingTerminal className="mt-4" />
+      <TradingTerminal className="mt-2" />
     </div>
   );
 };
