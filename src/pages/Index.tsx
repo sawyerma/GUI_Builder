@@ -10,6 +10,7 @@ import AI from "./AI";
 import ML from "./ML";
 import Whales from "./Whales";
 import News from "./News";
+import TradingBot from "./TradingBot";
 
 interface CoinData {
   id: string;
@@ -24,7 +25,7 @@ interface CoinData {
 
 const Index = () => {
   const [viewMode, setViewMode] = useState<
-    "trading" | "database" | "ai" | "ml" | "whales" | "news"
+    "trading" | "database" | "ai" | "ml" | "whales" | "news" | "bot"
   >("trading");
   const [selectedCoin, setSelectedCoin] = useState("BTC/USDT");
   const [currentCoinData, setCurrentCoinData] = useState<CoinData>({
@@ -72,6 +73,9 @@ const Index = () => {
   if (viewMode === "news") {
     return <News onBackToTrading={() => setViewMode("trading")} />;
   }
+  if (viewMode === "bot") {
+    return <TradingBot onBackToTrading={() => setViewMode("trading")} />;
+  }
 
   return (
     <ThemeProvider>
@@ -92,6 +96,16 @@ const Index = () => {
             }`}
           >
             Trading
+          </button>
+          <button
+            onClick={() => setViewMode("bot")}
+            className={`px-2 py-1 text-xs rounded transition-colors ${
+              viewMode === "bot"
+                ? "bg-blue-500 text-white"
+                : "bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600"
+            }`}
+          >
+            Bot
           </button>
           <button
             onClick={() => setViewMode("database")}
